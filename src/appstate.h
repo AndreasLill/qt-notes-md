@@ -8,6 +8,7 @@ class AppState : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
+    QML_SINGLETON
     Q_PROPERTY(QUrl workspace READ getWorkspace NOTIFY workspaceChanged)
 
 public:

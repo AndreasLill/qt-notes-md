@@ -9,18 +9,18 @@ class AppState : public QObject
     Q_OBJECT
     QML_ELEMENT
     QML_SINGLETON
-    Q_PROPERTY(QUrl workspace READ getWorkspace NOTIFY workspaceChanged)
+    Q_PROPERTY(QString workspace READ getWorkspace NOTIFY workspaceChanged)
 
 public:
     explicit AppState(QObject *parent = nullptr);
-    QUrl getWorkspace() const;
-    Q_INVOKABLE void setWorkspace(const QUrl& value);
-
-private:
-    QUrl workspace = {};
+    QString getWorkspace() const;
+    Q_INVOKABLE void setWorkspace(const QString &value);
 
 signals:
     void workspaceChanged();
+
+private:
+    QString workspace = {};
 };
 
 #endif // APPSTATE_H

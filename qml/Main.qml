@@ -15,7 +15,10 @@ Window {
         id: workspacePicker
         visible: AppState.workspace == ""
         anchors.centerIn: parent
-        onFolderSelected: (folder) => AppState.setWorkspace(folder)
+        onFolderSelected: (folder) => {
+            AppState.setWorkspace(folder)
+            FileViewerModel.setRootDirectory(AppState.workspace);
+        }
     }
 
     SplitView {

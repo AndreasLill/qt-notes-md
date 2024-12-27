@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    AppState* appState = new AppState();
+    AppState *appState = new AppState();
 
     QGuiApplication app(argc, argv);
 

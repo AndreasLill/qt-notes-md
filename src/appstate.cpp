@@ -4,13 +4,13 @@ AppState::AppState(QObject *parent)
     : QObject{parent}
 {}
 
-QUrl AppState::getWorkspace() const
+QString AppState::getWorkspace() const
 {
     return workspace;
 }
 
-void AppState::setWorkspace(const QUrl& value)
+void AppState::setWorkspace(const QString &value)
 {
-    workspace = value;
+    workspace = QString(value).replace("file://", "");
     emit workspaceChanged();
 }

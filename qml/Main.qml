@@ -3,7 +3,6 @@ import QtQuick.Controls
 import qtnotesmd
 
 Window {
-
     id: root
     width: 1280
     height: 720
@@ -15,10 +14,7 @@ Window {
         id: workspacePicker
         visible: AppState.workspace == ""
         anchors.centerIn: parent
-        onFolderSelected: (folder) => {
-            AppState.setWorkspace(folder)
-            FileViewerModel.setRootDirectory(AppState.workspace);
-        }
+        onFolderSelected: (folder) => AppState.setWorkspace(folder)
     }
 
     SplitView {

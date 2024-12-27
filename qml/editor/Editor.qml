@@ -4,7 +4,7 @@ import qtnotesmd
 
 Rectangle {
     id: root
-    color: Theme.transparent
+    color: Theme.surface
 
     TextArea {
         color: Theme.text

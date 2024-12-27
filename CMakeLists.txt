@@ -26,7 +26,6 @@ qt_add_qml_module(appqt-notes-md
         qml/theme/Theme.qml
         qml/workspace/Workspace.qml
         qml/workspace/WorkspacePicker.qml
-        qml/workspace/WorkspaceFileViewer.qml
         qml/editor/Editor.qml
     SOURCES
         src/appstate.h

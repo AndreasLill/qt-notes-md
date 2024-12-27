@@ -1,10 +1,10 @@
-#ifndef FILEVIEWERMODEL_H
-#define FILEVIEWERMODEL_H
+#ifndef WORKSPACEVIEWMODEL_H
+#define WORKSPACEVIEWMODEL_H
 
 #include <QFileSystemModel>
 #include <QQmlEngine>
 
-class FileViewerModel : public QFileSystemModel
+class WorkspaceViewModel : public QFileSystemModel
 {
     Q_OBJECT
     QML_ELEMENT
@@ -12,7 +12,7 @@ class FileViewerModel : public QFileSystemModel
     Q_PROPERTY(QModelIndex rootIndex READ getRootIndex WRITE setRootIndex NOTIFY rootIndexChanged)
 
 public:
-    explicit FileViewerModel(QObject *parent = nullptr);
+    explicit WorkspaceViewModel(QObject *parent = nullptr);
     int columnCount(const QModelIndex &parent) const override;
     QModelIndex getRootIndex() const;
     void setRootIndex(const QModelIndex &index);

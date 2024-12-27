@@ -12,15 +12,15 @@ Rectangle {
         target: AppState
         function onWorkspaceChanged() {
             // Update the root directory when workspace changes.
-            FileViewerModel.setRootDirectory(AppState.workspace)
+            WorkspaceViewModel.setRootDirectory(AppState.workspace)
         }
     }
 
     TreeView {
         id: treeView
         anchors.fill: parent
-        model: FileViewerModel
-        rootIndex: FileViewerModel.rootIndex
+        model: WorkspaceViewModel
+        rootIndex: WorkspaceViewModel.rootIndex
         boundsBehavior: Flickable.StopAtBounds
         boundsMovement: Flickable.StopAtBounds
 

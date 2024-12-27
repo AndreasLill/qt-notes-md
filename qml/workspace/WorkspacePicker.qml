@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Dialogs
+import qtnotesmd
 
 ColumnLayout {
     id: root
@@ -12,7 +13,7 @@ ColumnLayout {
 
     Text {
         text: qsTr("No workspace folder is selected.")
-        color: "#FFF"
+        color: Theme.text
         font.pixelSize: 15
         Layout.alignment: Qt.AlignCenter
     }

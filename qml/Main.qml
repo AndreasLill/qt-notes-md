@@ -3,12 +3,13 @@ import QtQuick.Controls
 import qtnotesmd
 
 Window {
+
     id: root
     width: 1280
     height: 720
     visible: true
     title: qsTr("Hello World")
-    color: "#222"
+    color: Theme.background
 
     WorkspacePicker {
         id: workspacePicker

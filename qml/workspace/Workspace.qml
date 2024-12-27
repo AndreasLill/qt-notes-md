@@ -1,6 +1,7 @@
 import QtQuick
+import qtnotesmd
 
 Rectangle {
     id: root
-    color: "transparent"
+    color: Theme.transparent
 }

@@ -13,7 +13,7 @@ ColumnLayout {
 
     Text {
         text: qsTr("No workspace folder is selected.")
-        color: Theme.text
+        color: Theme.current.text
         font.pixelSize: 15
         Layout.alignment: Qt.AlignCenter
     }

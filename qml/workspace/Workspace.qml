@@ -6,7 +6,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: Theme.background
+    color: Theme.current.background
 
     Connections {
         target: AppState
@@ -37,11 +37,11 @@ Rectangle {
             
             contentItem: Text {
                 text: item.fileName
-                color: Theme.text
+                color: Theme.current.text
             }
 
             background: Rectangle {
-                color: Theme.background
+                color: Theme.current.background
             }
         }
     }

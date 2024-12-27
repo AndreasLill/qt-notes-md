@@ -4,10 +4,10 @@ import qtnotesmd
 
 Rectangle {
     id: root
-    color: Theme.surface
+    color: Theme.current.surface
 
     TextArea {
-        color: Theme.text
+        color: Theme.current.text
         font.pixelSize: 15
         anchors.fill: parent
     }

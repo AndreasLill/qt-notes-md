@@ -24,6 +24,7 @@ qt_add_qml_module(appqt-notes-md
     QML_FILES
         qml/Main.qml
         qml/theme/Theme.qml
+        qml/theme/ThemeBase.qml
         qml/workspace/Workspace.qml
         qml/workspace/WorkspacePicker.qml
         qml/editor/Editor.qml

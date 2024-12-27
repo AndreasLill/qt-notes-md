@@ -12,14 +12,14 @@ int WorkspaceViewModel::columnCount(const QModelIndex &parent) const
     return 1;
 }
 
-QModelIndex WorkspaceViewModel::getRootIndex() const
+QVariant WorkspaceViewModel::getRootIndex() const
 {
-    return rootIndex;
+    return QVariant::fromValue(rootIndex);
 }
 
-void WorkspaceViewModel::setRootIndex(const QModelIndex &index)
+void WorkspaceViewModel::setRootIndex(const QVariant &index)
 {
-    rootIndex = index;
+    rootIndex = index.value<QModelIndex>();
     emit rootIndexChanged();
 }
 

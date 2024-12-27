@@ -9,13 +9,16 @@ class WorkspaceViewModel : public QFileSystemModel
     Q_OBJECT
     QML_ELEMENT
     QML_SINGLETON
-    Q_PROPERTY(QModelIndex rootIndex READ getRootIndex WRITE setRootIndex NOTIFY rootIndexChanged)
+
+    // Supposed to be the type: QModelIndex
+    // But get error in QML: Type "QModelIndex" of property "rootIndex" not found. This is likely due to a missing dependency entry or a type not being exposed declaratively.
+    Q_PROPERTY(QVariant rootIndex READ getRootIndex WRITE setRootIndex NOTIFY rootIndexChanged)
 
 public:
     explicit WorkspaceViewModel(QObject *parent = nullptr);
     int columnCount(const QModelIndex &parent) const override;
-    QModelIndex getRootIndex() const;
-    void setRootIndex(const QModelIndex &index);
+    QVariant getRootIndex() const;
+    void setRootIndex(const QVariant &index);
 
     Q_INVOKABLE void setRootDirectory(const QString &str);
 

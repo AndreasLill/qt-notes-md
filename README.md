@@ -8,3 +8,5 @@ cmake -DCMAKE_TOOLCHAIN_FILE:FILEPATH=\<QT_INSTALLATION_FOLDER\>/gcc_64/lib/cmak
 cmake --build \<PROJECT_FOLDER\>/build --config Debug
 ### Build (Release)
 cmake --build \<PROJECT_FOLDER\>/build --config Release
+
+#### Test ####

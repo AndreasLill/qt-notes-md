@@ -10,7 +10,7 @@ include_directories(
     src
 )
 
-set_source_files_properties(qml/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(qml/shared/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -23,11 +23,11 @@ qt_add_qml_module(appqt-notes-md
     VERSION 1.0
     QML_FILES
         qml/Main.qml
-        qml/theme/Theme.qml
-        qml/theme/ThemeBase.qml
         qml/workspace/Workspace.qml
         qml/workspace/WorkspacePicker.qml
         qml/editor/Editor.qml
+        qml/shared/theme/Theme.qml
+        qml/shared/theme/ThemeBase.qml
     SOURCES
         src/AppState.h
         src/AppState.cpp

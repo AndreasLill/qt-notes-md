@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "qobject": "cpp",
-        "qfilesystemmodel": "cpp"
+        "qfilesystemmodel": "cpp",
+        "qstandardpaths": "cpp",
+        "quuid": "cpp"
     }
 }

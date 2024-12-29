@@ -31,8 +31,10 @@ qt_add_qml_module(appqt-notes-md
     SOURCES
         src/appstate.h
         src/appstate.cpp
-        src/workspaceviewmodel.h
-        src/workspaceviewmodel.cpp
+        src/filehandler.h
+        src/filehandler.cpp
+        src/workspacefilesystemmodel.h
+        src/workspacefilesystemmodel.cpp
 )
 
 set_target_properties(appqt-notes-md PROPERTIES

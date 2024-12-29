@@ -12,15 +12,16 @@ Rectangle {
         target: AppState
         function onWorkspaceChanged() {
             // Update the root directory when workspace changes.
-            WorkspaceViewModel.setRootDirectory(AppState.workspace)
+            WorkspaceFileSystemModel.setRootDirectory(AppState.workspace)
+            console.log("Workspace set to " + AppState.workspace)
         }
     }
 
     TreeView {
         id: treeView
         anchors.fill: parent
-        model: WorkspaceViewModel
-        rootIndex: WorkspaceViewModel.rootIndex
+        model: WorkspaceFileSystemModel
+        rootIndex: WorkspaceFileSystemModel.rootIndex
         boundsBehavior: Flickable.StopAtBounds
         boundsMovement: Flickable.StopAtBounds
 
@@ -41,7 +42,26 @@ Rectangle {
             }
 
             background: Rectangle {
-                color: Theme.current.background
+                color: (AppState.currentNote == item.filePath) ? Theme.colorWithAlpha(Theme.current.accent, 0.5) : Theme.current.transparent
+            }
+
+            HoverHandler {
+                id: hoverHandler
+            }
+
+            TapHandler {
+                acceptedButtons: Qt.LeftButton | Qt.RightButton
+                onSingleTapped: (eventPoint, button) => {
+                    switch (button) {
+                        case Qt.LeftButton:
+                            if (!item.hasChildren) {
+                                AppState.setCurrentNote(item.filePath)
+                            }
+                            break;
+                        case Qt.RightButton:
+                            break;
+                    }
+                }
             }
         }
     }

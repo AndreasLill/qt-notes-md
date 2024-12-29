@@ -1,10 +1,10 @@
-#ifndef WORKSPACEVIEWMODEL_H
-#define WORKSPACEVIEWMODEL_H
+#ifndef WORKSPACEFILESYSTEMMODEL_H
+#define WORKSPACEFILESYSTEMMODEL_H
 
 #include <QFileSystemModel>
 #include <QQmlEngine>
 
-class WorkspaceViewModel : public QFileSystemModel
+class WorkspaceFileSystemModel : public QFileSystemModel
 {
     Q_OBJECT
     QML_ELEMENT
@@ -15,7 +15,7 @@ class WorkspaceViewModel : public QFileSystemModel
     Q_PROPERTY(QVariant rootIndex READ getRootIndex WRITE setRootIndex NOTIFY rootIndexChanged)
 
 public:
-    explicit WorkspaceViewModel(QObject *parent = nullptr);
+    explicit WorkspaceFileSystemModel(QObject *parent = nullptr);
     int columnCount(const QModelIndex &parent) const override;
     QVariant getRootIndex() const;
     void setRootIndex(const QVariant &index);

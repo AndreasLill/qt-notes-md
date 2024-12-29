@@ -15,7 +15,7 @@ set_source_files_properties(qml/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE
 qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(appqt-notes-md
-    src/main.cpp
+    src/Main.cpp
 )
 
 qt_add_qml_module(appqt-notes-md
@@ -29,12 +29,12 @@ qt_add_qml_module(appqt-notes-md
         qml/workspace/WorkspacePicker.qml
         qml/editor/Editor.qml
     SOURCES
-        src/appstate.h
-        src/appstate.cpp
-        src/filehandler.h
-        src/filehandler.cpp
-        src/workspacefilesystemmodel.h
-        src/workspacefilesystemmodel.cpp
+        src/AppState.h
+        src/AppState.cpp
+        src/FileHandler.h
+        src/FileHandler.cpp
+        src/WorkspaceFileSystemModel.h
+        src/WorkspaceFileSystemModel.cpp
 )
 
 set_target_properties(appqt-notes-md PROPERTIES

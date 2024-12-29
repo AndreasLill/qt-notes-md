@@ -1,4 +1,4 @@
-#include "appstate.h"
+#include "AppState.h"
 
 AppState::AppState(QObject *parent): QObject{parent}
 {

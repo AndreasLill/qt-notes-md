@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "appstate.h"
+#include "AppState.h"
 
 int main(int argc, char *argv[])
 {

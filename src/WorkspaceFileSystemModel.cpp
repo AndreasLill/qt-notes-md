@@ -1,4 +1,4 @@
-#include "workspacefilesystemmodel.h"
+#include "WorkspaceFileSystemModel.h"
 
 #include <QStandardPaths>
 

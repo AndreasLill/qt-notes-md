@@ -38,7 +38,7 @@ Rectangle {
             text: root.editorText
             textFormat: TextEdit.PlainText
             wrapMode: TextEdit.Wrap
-            tabStopDistance: fontMetrics.averageCharacterWidth * 2
+            tabStopDistance: fontMetrics.averageCharacterWidth * 4
 
             cursorDelegate: Rectangle {
                 visible: textArea.cursorVisible

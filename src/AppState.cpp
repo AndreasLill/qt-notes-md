@@ -15,6 +15,11 @@ QString AppState::getCurrentNote() const
     return currentNote;
 }
 
+int AppState::getEditorFontSize()
+{
+    return editorFontSize;
+}
+
 void AppState::setWorkspace(const QString &value)
 {
     workspace = QString(value).replace("file://", "");

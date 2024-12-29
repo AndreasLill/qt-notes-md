@@ -27,16 +27,6 @@ Rectangle {
 
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
-            contentItem: Rectangle {
-                implicitWidth: 10
-                color: Theme.current.accent
-                opacity: scrollBar.active ? 1.0 : 0.0
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: 500
-                    }
-                }
-            }
         }
 
         TextArea.flickable: TextArea {

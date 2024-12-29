@@ -25,6 +25,10 @@ Rectangle {
         boundsBehavior: Flickable.StopAtBounds
         boundsMovement: Flickable.StopAtBounds
 
+        ScrollBar.vertical: ScrollBar {
+            id: scrollBar
+        }
+
         delegate: TreeViewDelegate {
 
             required property int index

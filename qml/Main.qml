@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import qtnotesmd
 
 ApplicationWindow {
@@ -17,10 +18,47 @@ ApplicationWindow {
         onFolderSelected: (folder) => AppState.setWorkspace(folder)
     }
 
+    SideBar {
+        id: sideBar
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        visible: AppState.workspace != ""
+    }
+
+    DividerVertical {
+        id: divider
+        anchors.left: sideBar.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        visible: AppState.workspace != ""
+    }
+
     SplitView {
-        anchors.fill: parent
+        id: splitView
+        anchors.left: divider.right
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         orientation: Qt.Horizontal
         visible: AppState.workspace != ""
+
+        handle: RowLayout {
+            id: handleRoot
+            spacing: 0
+
+            DividerVertical {
+                Layout.fillHeight: true
+                color: Theme.current.background
+            }
+            DividerVertical {
+                Layout.fillHeight: true
+            }
+            DividerVertical {
+                Layout.fillHeight: true
+                color: Theme.current.surface
+            }
+        }
 
         Workspace {
             id: workspace

@@ -23,11 +23,14 @@ qt_add_qml_module(appqt-notes-md
     VERSION 1.0
     QML_FILES
         qml/Main.qml
+        qml/editor/Editor.qml
+        qml/sidebar/SideBar.qml
+        qml/sidebar/SideBarButton.qml
         qml/workspace/Workspace.qml
         qml/workspace/WorkspacePicker.qml
-        qml/editor/Editor.qml
         qml/shared/theme/Theme.qml
         qml/shared/theme/ThemeBase.qml
+        qml/shared/components/DividerVertical.qml
     SOURCES
         src/AppState.h
         src/AppState.cpp
@@ -35,6 +38,9 @@ qt_add_qml_module(appqt-notes-md
         src/FileHandler.cpp
         src/WorkspaceFileSystemModel.h
         src/WorkspaceFileSystemModel.cpp
+    RESOURCES
+        assets/add_24dp.svg
+        assets/add_folder_24dp.svg
 )
 
 set_target_properties(appqt-notes-md PROPERTIES

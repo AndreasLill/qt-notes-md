@@ -11,6 +11,9 @@ Rectangle {
 
     property string editorText;
 
+    onWidthChanged: textArea.update()
+    onHeightChanged: textArea.update()
+
     Connections {
         target: AppState
         function onCurrentNoteChanged() {
@@ -37,6 +40,8 @@ Rectangle {
             font.pixelSize: AppState.editorFontSize
             text: root.editorText
             textFormat: TextEdit.PlainText
+            // TODO: Wrap lags out when dragging split view.
+            // Maybe disable on start drag and enable on end drag?
             wrapMode: TextEdit.Wrap
             tabStopDistance: fontMetrics.averageCharacterWidth * 4
 

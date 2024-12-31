@@ -18,6 +18,7 @@ Rectangle {
 
         SideBarButton {
             Layout.alignment: Qt.AlignHCenter
+            tooltip: qsTr("Create Note")
             image: "../../assets/add_24dp.svg"
             imageColor: Theme.current.text
             backgroundColor: Theme.current.background
@@ -29,6 +30,7 @@ Rectangle {
 
         SideBarButton {
             Layout.alignment: Qt.AlignHCenter
+            tooltip: qsTr("Create Folder")
             image: "../../assets/add_folder_24dp.svg"
             imageColor: Theme.current.text
             backgroundColor: Theme.current.background

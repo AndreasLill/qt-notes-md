@@ -17,9 +17,31 @@ Rectangle {
     Connections {
         target: AppState
         function onCurrentNoteChanged() {
-            // Update the editor with the current note.
             root.editorText = FileHandler.readFile(AppState.currentNote)
             console.log("current note set to " + AppState.currentNote)
+        }
+    }
+
+    ColumnLayout {
+        id: emptyLayout
+        anchors.centerIn: parent
+        visible: AppState.currentNote == ""
+        spacing: 16
+
+        Text {
+            Layout.alignment: Qt.AlignHCenter
+            text: "No note is open"
+            color: Theme.current.text
+            font.pixelSize: 24
+        }
+
+        AppTextButton {
+            Layout.alignment: Qt.AlignHCenter
+            contentText: "Create a new note"
+            contentColor: Theme.current.accent
+            onClicked: {
+                AppState.setCurrentNote(FileHandler.createFile(AppState.workspace, "Untitled Note"));
+            }
         }
     }
 
@@ -27,6 +49,7 @@ Rectangle {
         id: flickable
         anchors.fill: parent
         boundsBehavior: Flickable.StopAtBounds
+        visible: AppState.currentNote != ""
 
         ScrollBar.vertical: ScrollBar {
             id: scrollBar

@@ -5,7 +5,7 @@ import qtnotesmd
 Rectangle {
     id: root
     width: 48
-    color: "transparent"
+    color: Theme.current.transparent
     anchors.topMargin: 8
     anchors.bottomMargin: 8
 
@@ -23,8 +23,7 @@ Rectangle {
             imageColor: Theme.current.text
             backgroundColor: Theme.current.background
             onClicked: {
-                // TODO: Add new note in workspace.
-                FileHandler.createFile(AppState.workspace, qsTr("Untitled Note"))
+                AppState.setCurrentNote(FileHandler.createFile(AppState.workspace, "Untitled Note"))
             }
         }
 
@@ -35,8 +34,7 @@ Rectangle {
             imageColor: Theme.current.text
             backgroundColor: Theme.current.background
             onClicked: {
-                // TODO: Add new folder in workspace.
-                FileHandler.createFolder(AppState.workspace, qsTr("Untitled Folder"))
+                FileHandler.createFolder(AppState.workspace, "Untitled Folder")
             }
         }
     }

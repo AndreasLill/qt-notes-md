@@ -12,7 +12,7 @@ class FileHandler : public QObject
 public:
     explicit FileHandler(QObject *parent = nullptr);
     Q_INVOKABLE static QString readFile(const QString &path);
-    Q_INVOKABLE static void createFile(const QString &path, const QString &name);
+    Q_INVOKABLE static QString createFile(const QString &path, const QString &name);
     Q_INVOKABLE static void createFolder(const QString &path, const QString &name);
 };
 

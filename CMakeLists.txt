@@ -31,6 +31,7 @@ qt_add_qml_module(appqt-notes-md
         qml/shared/theme/Theme.qml
         qml/shared/theme/ThemeBase.qml
         qml/shared/components/DividerVertical.qml
+        qml/shared/components/AppTextButton.qml
     SOURCES
         src/AppState.h
         src/AppState.cpp

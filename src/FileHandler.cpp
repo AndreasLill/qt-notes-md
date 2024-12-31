@@ -19,12 +19,12 @@ QString FileHandler::readFile(const QString &path)
     return stream.readAll();
 }
 
-void FileHandler::createFile(const QString &path, const QString &name)
+QString FileHandler::createFile(const QString &path, const QString &name)
 {
     if (path.isEmpty())
-        return;
+        return {};
     if (name.isEmpty())
-        return;
+        return {};
     
     const QString extension = {".md"};
     int count = 0;
@@ -36,7 +36,7 @@ void FileHandler::createFile(const QString &path, const QString &name)
         if (!file.exists())
         {
             file.open(QIODevice::WriteOnly);
-            break;
+            return fileName;
         }
 
         count++;

@@ -40,7 +40,7 @@ Rectangle {
             contentText: "Create a new note"
             contentColor: Theme.current.accent
             onClicked: {
-                AppState.setCurrentNote(FileHandler.createFile(AppState.workspace, "Untitled Note"));
+                AppState.setCurrentNote(FileHandler.createFile(AppState.workspace, "Untitled Note"))
             }
         }
     }
@@ -77,6 +77,10 @@ Rectangle {
             FontMetrics {
                 id: fontMetrics
                 font: textArea.font
+            }
+
+            onCanUndoChanged: {
+                AppState.setEditorCanUndo(textArea.canUndo)
             }
         }
     }

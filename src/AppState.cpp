@@ -20,6 +20,11 @@ int AppState::getEditorFontSize()
     return editorFontSize;
 }
 
+bool AppState::getEditorCanUndo()
+{
+    return editorCanUndo;
+}
+
 void AppState::setWorkspace(const QString &value)
 {
     workspace = QString(value).replace("file://", "");
@@ -30,4 +35,10 @@ void AppState::setCurrentNote(const QString &value)
 {
     currentNote = value;
     emit currentNoteChanged();
+}
+
+void AppState::setEditorCanUndo(bool value)
+{
+    editorCanUndo = value;
+    emit editorCanUndoChanged();
 }

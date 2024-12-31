@@ -41,7 +41,7 @@ Rectangle {
             implicitHeight: 25
             
             contentItem: Text {
-                text: item.fileName
+                text: (AppState.currentNote == item.filePath && AppState.editorCanUndo) ? item.fileName + "*" : item.fileName
                 color: Theme.current.text
             }
 

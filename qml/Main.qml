@@ -10,6 +10,12 @@ ApplicationWindow {
     visible: true
     title: qsTr("QT Notes MD")
     color: Theme.current.background
+    menuBar: AppMenuBar {
+        onFileQuit: Qt.quit()
+        onFileSave: {
+            console.log("save")
+        }
+    }
 
     WorkspacePicker {
         id: workspacePicker

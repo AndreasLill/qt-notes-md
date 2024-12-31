@@ -31,7 +31,7 @@ void FileHandler::createFile(const QString &path, const QString &name)
 
     while (true)
     {
-        QString fileName = (count > 0) ? QString("%1/%2 (%3)%4").arg(path, name, QString::number(count), extension) : QString("%1/%2%3").arg(path, name, extension);
+        QString fileName = (count > 0) ? QString("%1/%2(%3)%4").arg(path, name, QString::number(count), extension) : QString("%1/%2%3").arg(path, name, extension);
         QFile file(fileName);
         if (!file.exists())
         {
@@ -54,11 +54,11 @@ void FileHandler::createFolder(const QString &path, const QString &name)
 
     while (true)
     {
-        QString fullDirName = (count > 0) ? QString("%1/%2 (%3)").arg(path, name, QString::number(count)) : QString("%1/%2").arg(path, name);
+        QString fullDirName = (count > 0) ? QString("%1/%2(%3)").arg(path, name, QString::number(count)) : QString("%1/%2").arg(path, name);
         QDir fullDir(fullDirName);
         if (!fullDir.exists())
         {
-            QString folderName = (count > 0) ? QString("%1 (%2)").arg(name, QString::number(count)) : name;
+            QString folderName = (count > 0) ? QString("%1(%2)").arg(name, QString::number(count)) : name;
             QDir dir(path);
             dir.mkdir(folderName);
             break;

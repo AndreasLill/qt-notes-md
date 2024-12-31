@@ -10,8 +10,8 @@ Button {
 
     implicitWidth: 32
     implicitHeight: 32
-    icon.width: 24
-    icon.height: 24
+    icon.width: 20
+    icon.height: 20
     icon.source: root.image
     icon.color: root.pressed ? Qt.lighter(root.imageColor) : root.imageColor
     background: Rectangle {

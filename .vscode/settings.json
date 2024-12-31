@@ -3,6 +3,10 @@
         "qobject": "cpp",
         "qfilesystemmodel": "cpp",
         "qstandardpaths": "cpp",
-        "quuid": "cpp"
+        "quuid": "cpp",
+        "type_traits": "cpp",
+        "chrono": "cpp",
+        "text_encoding": "cpp",
+        "typeinfo": "cpp"
     }
 }

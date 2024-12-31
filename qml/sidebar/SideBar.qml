@@ -24,7 +24,7 @@ Rectangle {
             backgroundColor: Theme.current.background
             onClicked: {
                 // TODO: Add new note in workspace.
-                console.log("clicked add")
+                FileHandler.createFile(AppState.workspace, qsTr("Untitled Note"))
             }
         }
 
@@ -36,7 +36,7 @@ Rectangle {
             backgroundColor: Theme.current.background
             onClicked: {
                 // TODO: Add new folder in workspace.
-                console.log("clicked add_folder")
+                FileHandler.createFolder(AppState.workspace, qsTr("Untitled Folder"))
             }
         }
     }

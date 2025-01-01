@@ -20,6 +20,7 @@ Rectangle {
     TreeView {
         id: treeView
         anchors.fill: parent
+        anchors.margins: 4
         model: WorkspaceFileSystemModel
         rootIndex: WorkspaceFileSystemModel.rootIndex
         boundsBehavior: Flickable.StopAtBounds
@@ -46,11 +47,8 @@ Rectangle {
             }
 
             background: Rectangle {
-                color: (AppState.currentNote == item.filePath) ? Theme.colorWithAlpha(Theme.current.accent, 0.5) : Theme.current.transparent
-            }
-
-            HoverHandler {
-                id: hoverHandler
+                color: (AppState.currentNote == item.filePath) ? Theme.colorWithAlpha(Theme.current.accent, 0.3) : (item.hovered) ? Qt.lighter(Theme.current.background) : Theme.current.background
+                radius: 4
             }
 
             TapHandler {

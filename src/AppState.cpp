@@ -78,3 +78,19 @@ void AppState::saveCurrentNote()
     FileHandler::saveFile(currentNote, editorText);
     emit currentNoteSaved();
 }
+
+QString AppState::readFile(const QString &path)
+{
+    return FileHandler::readFile(path);
+}
+
+QString AppState::createFile(const QString &path, const QString &name)
+{
+    return FileHandler::createFile(path, name);
+}
+
+QString AppState::createFolder(const QString &path, const QString &name)
+{
+    return FileHandler::createFolder(path, name);
+}
+

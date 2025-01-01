@@ -23,7 +23,9 @@ Rectangle {
             imageColor: Theme.current.text
             backgroundColor: Theme.current.background
             onClicked: {
-                AppState.setCurrentNote(FileHandler.createFile(AppState.workspace, "Untitled Note"))
+                let filePath = AppState.createFile(AppState.workspace, "Untitled Note")
+                AppState.setCurrentNote(filePath)
+                console.log("Created folder: " + filePath)
             }
         }
 
@@ -34,7 +36,8 @@ Rectangle {
             imageColor: Theme.current.text
             backgroundColor: Theme.current.background
             onClicked: {
-                FileHandler.createFolder(AppState.workspace, "Untitled Folder")
+                let folderPath = AppState.createFolder(AppState.workspace, "Untitled Folder")
+                console.log("Created folder: " + folderPath)
             }
         }
     }

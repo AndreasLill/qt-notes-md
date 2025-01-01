@@ -28,6 +28,9 @@ public:
     Q_INVOKABLE void setEditorFontSize(int size);
     Q_INVOKABLE void setEditorCanUndo(bool value);
     Q_INVOKABLE void saveCurrentNote();
+    Q_INVOKABLE QString readFile(const QString &path);
+    Q_INVOKABLE QString createFile(const QString &path, const QString &name);
+    Q_INVOKABLE QString createFolder(const QString &path, const QString &name);
 
 signals:
     void workspaceChanged();

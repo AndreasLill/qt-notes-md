@@ -15,7 +15,8 @@ Rectangle {
     Connections {
         target: AppState
         function onCurrentNoteChanged() {
-            AppState.setEditorText(FileHandler.readFile(AppState.currentNote))
+            let data = AppState.readFile(AppState.currentNote)
+            AppState.setEditorText(data)
             console.log("current note set to " + AppState.currentNote)
         }
         function onEditorTextChanged() {
@@ -51,7 +52,8 @@ Rectangle {
             contentText: "Create a new note"
             contentColor: Theme.current.accent
             onClicked: {
-                AppState.setCurrentNote(FileHandler.createFile(AppState.workspace, "Untitled Note"))
+                let fileName = AppState.createFile(AppState.workspace, "Untitled Note")
+                AppState.setCurrentNote(fileName)
             }
         }
     }

@@ -3,11 +3,6 @@
 #include <QFile>
 #include <QDir>
 
-FileHandler::FileHandler(QObject *parent): QObject{parent}
-{
-    
-}
-
 void FileHandler::saveFile(const QString &path, const QString &data)
 {
     if (path.isEmpty())
@@ -59,12 +54,12 @@ QString FileHandler::createFile(const QString &path, const QString &name)
     }
 }
 
-void FileHandler::createFolder(const QString &path, const QString &name)
+QString FileHandler::createFolder(const QString &path, const QString &name)
 {
     if (path.isEmpty())
-        return;
+        return {};
     if (name.isEmpty())
-        return;
+        return {};
     
     int count = 0;
 
@@ -77,7 +72,7 @@ void FileHandler::createFolder(const QString &path, const QString &name)
             QString folderName = (count > 0) ? QString("%1(%2)").arg(name, QString::number(count)) : name;
             QDir dir(path);
             dir.mkdir(folderName);
-            break;
+            return path + "/" + folderName;
         }
 
         count++;

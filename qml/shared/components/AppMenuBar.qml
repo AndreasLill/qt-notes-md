@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import qtnotesmd
 
 MenuBar {
     id: root
@@ -12,19 +13,17 @@ MenuBar {
         id: fileMenu
         title: "&File"
 
-        MenuItem {
-            action: Action {
-                text: "Save"
-                shortcut: StandardKey.Save
-                onTriggered: root.fileSave()
-            }
+        AppMenuItem {
+            menuText: "Save"
+            shortcutText: "CTRL+S"
+            shortcutKey: StandardKey.Save
+            onClicked: root.fileSave()
         }
-        MenuItem {
-            action: Action {
-                text: "Quit"
-                shortcut: StandardKey.Quit
-                onTriggered: root.fileQuit()
-            }
+        AppMenuItem {
+            menuText: "Quit"
+            shortcutText: "CTRL+Q"
+            shortcutKey: StandardKey.Quit
+            onClicked: root.fileQuit()
         }
     }
 }

@@ -8,6 +8,19 @@ FileHandler::FileHandler(QObject *parent): QObject{parent}
     
 }
 
+void FileHandler::saveFile(const QString &path, const QString &data)
+{
+    if (path.isEmpty())
+        return;
+    if (data.isEmpty())
+        return;
+
+    QFile file(path);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    file.write(data.toUtf8());
+    file.close();
+}
+
 QString FileHandler::readFile(const QString &path)
 {
     if (path.isEmpty())
@@ -15,8 +28,10 @@ QString FileHandler::readFile(const QString &path)
 
     QFile file(path);
     QTextStream stream(&file);
-    file.open(QIODevice::ReadOnly);
-    return stream.readAll();
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QString data = stream.readAll();
+    file.close();
+    return data;
 }
 
 QString FileHandler::createFile(const QString &path, const QString &name)
@@ -35,7 +50,8 @@ QString FileHandler::createFile(const QString &path, const QString &name)
         QFile file(fileName);
         if (!file.exists())
         {
-            file.open(QIODevice::WriteOnly);
+            file.open(QIODevice::WriteOnly | QIODevice::Text);
+            file.close();
             return fileName;
         }
 

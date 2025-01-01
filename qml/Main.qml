@@ -12,9 +12,7 @@ ApplicationWindow {
     color: Theme.current.background
     menuBar: AppMenuBar {
         onFileQuit: Qt.quit()
-        onFileSave: {
-            console.log("save")
-        }
+        onFileSave: AppState.saveCurrentNote()
     }
 
     WorkspacePicker {

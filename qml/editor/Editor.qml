@@ -9,16 +9,27 @@ Rectangle {
     id: root
     color: Theme.current.surface
 
-    property string editorText;
-
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()
 
     Connections {
         target: AppState
         function onCurrentNoteChanged() {
-            root.editorText = FileHandler.readFile(AppState.currentNote)
+            AppState.setEditorText(FileHandler.readFile(AppState.currentNote))
             console.log("current note set to " + AppState.currentNote)
+        }
+        function onEditorTextChanged() {
+            if (textArea.text != AppState.editorText) {
+                textArea.text = AppState.editorText
+            }
+        }
+        function onCurrentNoteSaved() {
+            // Reset the undo stack by recreating the text.
+            let tempText = AppState.editorText
+            let tempPosition = textArea.cursorPosition
+            AppState.setEditorText("")
+            AppState.setEditorText(tempText)
+            textArea.cursorPosition = tempPosition
         }
     }
 
@@ -61,27 +72,19 @@ Rectangle {
             Layout.fillHeight: true
             color: Theme.current.text
             font.pixelSize: AppState.editorFontSize
-            text: root.editorText
             textFormat: TextEdit.PlainText
             // TODO: Wrap lags out when dragging split view.
             // Maybe disable on start drag and enable on end drag?
             wrapMode: TextEdit.Wrap
             tabStopDistance: fontMetrics.averageCharacterWidth * 4
 
-            cursorDelegate: Rectangle {
-                visible: textArea.cursorVisible
-                color: Theme.current.accent
-                width: textArea.cursorRectangle.width
-            }
-
             FontMetrics {
                 id: fontMetrics
                 font: textArea.font
             }
 
-            onCanUndoChanged: {
-                AppState.setEditorCanUndo(textArea.canUndo)
-            }
+            onCanUndoChanged: AppState.setEditorCanUndo(textArea.canUndo)
+            onTextChanged: AppState.setEditorText(textArea.text)
         }
     }
 }

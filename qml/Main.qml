@@ -9,7 +9,7 @@ ApplicationWindow {
     height: 720
     visible: true
     title: qsTr("QT Notes MD")
-    color: Theme.current.background
+    palette: ThemeDark {}
     menuBar: AppMenuBar {
         onFileQuit: Qt.quit()
         onFileSave: AppState.saveCurrentNote()
@@ -30,11 +30,13 @@ ApplicationWindow {
         visible: AppState.workspace != ""
     }
 
-    DividerVertical {
+    Rectangle {
         id: divider
+        implicitWidth: 1
         anchors.left: sideBar.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        color: Qt.darker(palette.mid)
         visible: AppState.workspace != ""
     }
 
@@ -51,16 +53,20 @@ ApplicationWindow {
             id: handleRoot
             spacing: 0
 
-            DividerVertical {
+            Rectangle {
                 Layout.fillHeight: true
-                color: Theme.current.background
+                implicitWidth: 1
+                color: Qt.darker(palette.mid)
             }
-            DividerVertical {
+            Rectangle {
                 Layout.fillHeight: true
+                implicitWidth: 1
+                color: palette.mid
             }
-            DividerVertical {
+            Rectangle {
                 Layout.fillHeight: true
-                color: Theme.current.surface
+                implicitWidth: 1
+                color: palette.light
             }
         }
 

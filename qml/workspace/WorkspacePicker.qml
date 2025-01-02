@@ -1,27 +1,25 @@
 import QtCore
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls
 import QtQuick.Dialogs
 import qtnotesmd
 
 ColumnLayout {
     id: root
-    spacing: 8
+    spacing: 16
 
     signal folderSelected(var folder)
 
     Text {
         text: qsTr("No workspace folder is selected.")
-        color: Theme.current.text
-        font.pixelSize: 15
-        Layout.alignment: Qt.AlignCenter
+        color: palette.windowText
+        font.pixelSize: 16
+        Layout.alignment: Qt.AlignHCenter
     }
 
-    Button {
-        text: qsTr("Select Workspace")
-        Layout.alignment: Qt.AlignCenter
-        padding: 8
+    AppTextButton {
+        Layout.alignment: Qt.AlignHCenter
+        contentText: qsTr("Select Workspace")
         onClicked: folderDialog.open()
     }
 

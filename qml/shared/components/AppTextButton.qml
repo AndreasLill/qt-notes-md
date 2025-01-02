@@ -3,18 +3,21 @@ import QtQuick.Controls
 
 Button {
     required property string contentText
-    required property color contentColor
     property int fontSize: 15
 
     signal onClicked
 
     id: root
+    padding: 6
     contentItem: Text {
         text: root.contentText
-        color: root.hovered ? Qt.lighter(root.contentColor) : root.contentColor
+        color: palette.buttonText
         font.pixelSize: root.fontSize
         font.bold: true
     }
-    background: null
+    background: Rectangle {
+        color: root.hovered ? Qt.lighter(palette.base) : "transparent"
+        radius: 4
+    }
     onClicked: root.onClicked
 }

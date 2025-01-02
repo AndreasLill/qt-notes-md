@@ -6,7 +6,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: Theme.current.background
+    color: palette.base
 
     Connections {
         target: AppState
@@ -43,11 +43,11 @@ Rectangle {
             
             contentItem: Text {
                 text: (AppState.currentNote == item.filePath && AppState.editorCanUndo) ? item.fileName + "*" : item.fileName
-                color: Theme.current.text
+                color: (AppState.currentNote == item.filePath) ? palette.highlightedText : palette.buttonText
             }
 
             background: Rectangle {
-                color: (AppState.currentNote == item.filePath) ? Theme.colorWithAlpha(Theme.current.accent, 0.3) : (item.hovered) ? Qt.lighter(Theme.current.background) : Theme.current.background
+                color: (AppState.currentNote == item.filePath) ? palette.highlight : (item.hovered) ? Qt.lighter(palette.base) : "transparent"
                 radius: 4
             }
 

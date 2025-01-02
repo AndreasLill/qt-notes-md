@@ -29,8 +29,7 @@ qt_add_qml_module(appqt-notes-md
         qml/workspace/Workspace.qml
         qml/workspace/WorkspacePicker.qml
         qml/shared/theme/Theme.qml
-        qml/shared/theme/ThemeBase.qml
-        qml/shared/components/DividerVertical.qml
+        qml/shared/theme/ThemeDark.qml
         qml/shared/components/AppTextButton.qml
         qml/shared/components/AppMenuBar.qml
         qml/shared/components/AppMenuItem.qml

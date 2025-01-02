@@ -7,7 +7,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: Theme.current.surface
+    color: palette.light
 
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()
@@ -43,14 +43,13 @@ Rectangle {
         Text {
             Layout.alignment: Qt.AlignHCenter
             text: "No note is open"
-            color: Theme.current.text
+            color: palette.windowText
             font.pixelSize: 24
         }
 
         AppTextButton {
             Layout.alignment: Qt.AlignHCenter
             contentText: "Create a new note"
-            contentColor: Theme.current.accent
             onClicked: {
                 let fileName = AppState.createFile(AppState.workspace, "Untitled Note")
                 AppState.setCurrentNote(fileName)
@@ -72,7 +71,8 @@ Rectangle {
             id: textArea
             Layout.fillWidth: true
             Layout.fillHeight: true
-            color: Theme.current.text
+            padding: 16
+            color: palette.windowText
             font.pixelSize: AppState.editorFontSize
             textFormat: TextEdit.PlainText
             // TODO: Wrap lags out when dragging split view.

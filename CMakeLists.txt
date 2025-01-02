@@ -10,8 +10,6 @@ include_directories(
     src
 )
 
-set_source_files_properties(qml/shared/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-
 qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(appqt-notes-md
@@ -28,7 +26,6 @@ qt_add_qml_module(appqt-notes-md
         qml/sidebar/SideBarButton.qml
         qml/workspace/Workspace.qml
         qml/workspace/WorkspacePicker.qml
-        qml/shared/theme/Theme.qml
         qml/shared/theme/ThemeDark.qml
         qml/shared/components/AppTextButton.qml
         qml/shared/components/AppMenuBar.qml

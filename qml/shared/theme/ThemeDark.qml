@@ -7,7 +7,6 @@ Palette {
     buttonText: "#fa8072"
     // Generic Text
     windowText: "#ffffff"
-    brightText: "#ffffff"
     // Tooltips
     toolTipText: "#ffffff"
     toolTipBase: "#2a2a2a"

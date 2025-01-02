@@ -43,7 +43,7 @@ Rectangle {
             
             contentItem: Text {
                 text: (AppState.currentNote == item.filePath && AppState.editorCanUndo) ? item.fileName + "*" : item.fileName
-                color: (AppState.currentNote == item.filePath) ? palette.highlightedText : palette.buttonText
+                color: (AppState.currentNote == item.filePath) ? palette.highlightedText : palette.text
             }
 
             background: Rectangle {

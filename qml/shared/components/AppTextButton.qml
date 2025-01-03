@@ -1,23 +1,22 @@
 import QtQuick
 import QtQuick.Controls
+import qtnotesmd
 
 Button {
     required property string contentText
     property int fontSize: 15
 
-    signal onClicked
-
     id: root
-    padding: 6
+    padding: 8
     contentItem: Text {
         text: root.contentText
-        color: palette.buttonText
+        color: Theme.color.accent
         font.pixelSize: root.fontSize
         font.bold: true
     }
     background: Rectangle {
-        color: root.hovered ? Qt.lighter(palette.base) : "transparent"
+        color: root.hovered ? Theme.color.accent : "transparent"
         radius: 4
+        opacity: 0.1
     }
-    onClicked: root.onClicked
 }

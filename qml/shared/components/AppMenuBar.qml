@@ -1,14 +1,15 @@
 import QtQuick
 import QtQuick.Controls
+import qtnotesmd
 
 MenuBar {
     id: root
     implicitHeight: 28
     background: Rectangle {
-        color: palette.window
+        color: Theme.color.menuBarBackground
 
         Rectangle {
-            color: palette.mid
+            color: Theme.color.divider
             height: 1
             anchors.bottom: parent.bottom
             anchors.left: parent.left
@@ -19,15 +20,14 @@ MenuBar {
         id: menuBarItem
 
         background: Rectangle {
-            color: menuBarItem.highlighted ? palette.highlight : "transparent"
+            color: menuBarItem.highlighted ? Qt.lighter(Theme.color.menuBarBackground) : "transparent"
         }
         contentItem: Text {
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
             text: menuBarItem.text
             font: menuBarItem.font
-            color: menuBarItem.highlighted ? palette.highlightedText : palette.text
+            color: Theme.color.text
         }
-        
     }
 }

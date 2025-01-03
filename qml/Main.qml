@@ -9,10 +9,10 @@ ApplicationWindow {
     height: 720
     visible: true
     title: qsTr("QT Notes MD")
-    palette: ThemeDark {}
+    color: Theme.color.background
     menuBar: AppMenuBar {
 
-        AppMenu {
+        Menu {
             id: fileMenu
             title: "File"
 
@@ -33,9 +33,9 @@ ApplicationWindow {
 
     WorkspacePicker {
         id: workspacePicker
-        visible: AppState.workspace == ""
         anchors.centerIn: parent
         onFolderSelected: (folder) => AppState.setWorkspace(folder)
+        visible: !AppState.workspace
     }
 
     SideBar {
@@ -43,7 +43,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        visible: AppState.workspace != ""
+        visible: AppState.workspace
     }
 
     Rectangle {
@@ -52,8 +52,8 @@ ApplicationWindow {
         anchors.left: sideBar.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        color: palette.mid
-        visible: AppState.workspace != ""
+        color: Theme.color.divider
+        visible: AppState.workspace
     }
 
     SplitView {
@@ -63,7 +63,7 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         orientation: Qt.Horizontal
-        visible: AppState.workspace != ""
+        visible: AppState.workspace
 
         handle: RowLayout {
             id: handleRoot
@@ -72,17 +72,17 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillHeight: true
                 implicitWidth: 1
-                color: Qt.darker(palette.mid)
+                color: Theme.color.surface
             }
             Rectangle {
                 Layout.fillHeight: true
                 implicitWidth: 1
-                color: palette.mid
+                color: Theme.color.divider
             }
             Rectangle {
                 Layout.fillHeight: true
                 implicitWidth: 1
-                color: palette.base
+                color: Theme.color.editorBackground
             }
         }
 

@@ -7,7 +7,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: palette.base
+    color: AppState.currentNote ? Theme.color.editorBackground : Theme.color.background
 
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()
@@ -37,13 +37,13 @@ Rectangle {
     ColumnLayout {
         id: emptyLayout
         anchors.centerIn: parent
-        visible: AppState.currentNote == ""
+        visible: !AppState.currentNote
         spacing: 16
 
         Text {
             Layout.alignment: Qt.AlignHCenter
             text: "No note is open"
-            color: palette.windowText
+            color: Theme.color.text
             font.pixelSize: 24
         }
 
@@ -61,7 +61,7 @@ Rectangle {
         id: flickable
         anchors.fill: parent
         boundsBehavior: Flickable.StopAtBounds
-        visible: AppState.currentNote != ""
+        visible: AppState.currentNote
 
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
@@ -72,7 +72,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             padding: 16
-            color: palette.windowText
+            color: Theme.color.editorText
             font.pixelSize: AppState.editorFontSize
             textFormat: TextEdit.PlainText
             // TODO: Wrap lags out when dragging split view.

@@ -47,8 +47,9 @@ Rectangle {
             }
 
             background: Rectangle {
-                color: (AppState.currentNote == item.filePath) ? Theme.color.textHighlight : (item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
+                color: (AppState.currentNote == item.filePath) ? Theme.color.accent : (item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
                 radius: 4
+                opacity: (AppState.currentNote == item.filePath) ? 0.5 : 1
             }
 
             TapHandler {

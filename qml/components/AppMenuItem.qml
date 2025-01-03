@@ -9,7 +9,7 @@ MenuItem {
     id: root
 
     background: Rectangle {
-        color: root.focus ? Qt.lighter(Theme.color.menuBackground) : Theme.color.menuBackground
+        color: root.focus ? Qt.lighter(Theme.color.overlay) : Theme.color.overlay
     }
 
     contentItem: Rectangle {

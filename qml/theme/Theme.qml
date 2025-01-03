@@ -7,15 +7,13 @@ QtObject {
     property bool isDarkTheme: true
 
     property ThemeColor color: ThemeColor {
-        background: "#171717"
-        surface: "#1e1e1e"
-        text: "#ffffff"
-        textHighlight: "#7efa8072"
-        accent: "#fa8072"
-        editorBackground: "#1e1e1e"
-        editorText: "#ffffff"
-        divider: "#2a2a2a"
-        tooltip: "#383838"
-        menuBackground: "#232323"
+        background: "#1e2030"
+        surface: "#24273a"
+        overlay: "#494d64"
+        text: "#cad3f5"
+        accent: "#a6da95"
+        editorBackground: "#363a4f"
+        editorText: "#cad3f5"
+        editorTextHighlight: "#60a6da95"
     }
 }

@@ -27,9 +27,9 @@ ToolTip {
         case AppToolTip.Direction.Bottom: return Math.round(parent.height + root.margin)
     }
     background: Rectangle {
-        color: Theme.color.tooltip
+        color: Theme.color.overlay
         radius: 4
-        border.color: Theme.color.divider
+        border.color: Qt.lighter(Theme.color.overlay)
         border.width: 1
     }
     contentItem: Text {

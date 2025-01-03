@@ -52,7 +52,7 @@ ApplicationWindow {
         anchors.left: sideBar.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        color: Theme.color.divider
+        color: Qt.lighter(Theme.color.surface)
         visible: AppState.workspace
     }
 
@@ -77,7 +77,7 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillHeight: true
                 implicitWidth: 1
-                color: Theme.color.divider
+                color: Qt.lighter(Theme.color.surface)
             }
             Rectangle {
                 Layout.fillHeight: true

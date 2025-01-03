@@ -45,7 +45,7 @@ private:
     QString currentNote = {};
     QString editorText =  {};
     bool editorCanUndo = false;
-    int editorFontSize = 16;
+    int editorFontSize = 15;
 };
 
 #endif

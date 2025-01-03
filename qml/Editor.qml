@@ -7,7 +7,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: AppState.currentNote ? Theme.color.editorBackground : Theme.color.background
+    color: Theme.color.editorBackground
 
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()
@@ -72,13 +72,16 @@ Rectangle {
             Layout.fillWidth: true
             Layout.fillHeight: true
             padding: 16
-            color: Theme.color.editorText
-            font.pixelSize: AppState.editorFontSize
             textFormat: TextEdit.PlainText
+            color: Theme.color.editorText
+            selectedTextColor: Theme.color.editorText
+            palette.highlight: Theme.color.editorTextHighlight
             // TODO: Wrap lags out when dragging split view.
             // Maybe disable on start drag and enable on end drag?
             wrapMode: TextEdit.Wrap
             tabStopDistance: fontMetrics.averageCharacterWidth * 4
+            font.pixelSize: AppState.editorFontSize
+            font.family: "Mono"
 
             FontMetrics {
                 id: fontMetrics

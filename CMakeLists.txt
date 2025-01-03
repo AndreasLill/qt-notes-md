@@ -28,6 +28,7 @@ qt_add_qml_module(appqt-notes-md
         qml/workspace/WorkspacePicker.qml
         qml/shared/theme/ThemeDark.qml
         qml/shared/components/AppTextButton.qml
+        qml/shared/components/AppMenu.qml
         qml/shared/components/AppMenuBar.qml
         qml/shared/components/AppMenuItem.qml
     SOURCES

@@ -4,9 +4,8 @@ import QtQuick.Controls
 MenuItem {
     id: root
 
-    required property string menuText
-    property string shortcutText
-    property var shortcutKey
+    property string hint
+    property var shortcut
 
     contentItem: Rectangle {
         anchors.fill: parent
@@ -17,14 +16,14 @@ MenuItem {
         Text {
             anchors.verticalCenter: parent.verticalCenter 
             anchors.left: parent.left
-            text: root.menuText
+            text: root.text
             color: root.focus ? palette.highlightedText : palette.text
             font.pixelSize: 14
         }
         Text {
             anchors.verticalCenter: parent.verticalCenter 
             anchors.right: parent.right
-            text: root.shortcutText
+            text: root.hint
             color: root.focus ? palette.highlightedText : palette.text
             opacity: 0.5
             font.pixelSize: 14
@@ -32,8 +31,8 @@ MenuItem {
     }
 
     action: Action {
-        text: root.menuText
-        shortcut: root.shortcutKey
+        text: root.text
+        shortcut: root.shortcut
         onTriggered: root.clicked()
     }
 }

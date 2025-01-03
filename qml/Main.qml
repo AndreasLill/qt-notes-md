@@ -11,8 +11,24 @@ ApplicationWindow {
     title: qsTr("QT Notes MD")
     palette: ThemeDark {}
     menuBar: AppMenuBar {
-        onFileQuit: Qt.quit()
-        onFileSave: AppState.saveCurrentNote()
+
+        AppMenu {
+            id: fileMenu
+            title: "File"
+
+            AppMenuItem {
+                text: "Save"
+                hint: "CTRL+S"
+                shortcut: StandardKey.Save
+                onClicked: AppState.saveCurrentNote()
+            }
+            AppMenuItem {
+                text: "Quit"
+                hint: "CTRL+Q"
+                shortcut: StandardKey.Quit
+                onClicked: Qt.quit()
+            }
+        }
     }
 
     WorkspacePicker {
@@ -36,7 +52,7 @@ ApplicationWindow {
         anchors.left: sideBar.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        color: Qt.darker(palette.mid)
+        color: palette.mid
         visible: AppState.workspace != ""
     }
 
@@ -66,7 +82,7 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillHeight: true
                 implicitWidth: 1
-                color: palette.light
+                color: palette.base
             }
         }
 

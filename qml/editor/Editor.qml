@@ -7,7 +7,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: palette.light
+    color: palette.base
 
     onWidthChanged: textArea.update()
     onHeightChanged: textArea.update()

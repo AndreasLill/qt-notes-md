@@ -1,11 +1,10 @@
 import QtQuick
 import QtQuick.Controls
-import qtnotesmd
 
 MenuBar {
     id: root
     implicitHeight: 28
-    contentItem: Rectangle {
+    background: Rectangle {
         color: palette.window
 
         Rectangle {
@@ -16,25 +15,19 @@ MenuBar {
             anchors.right: parent.right
         }
     }
+    delegate: MenuBarItem {
+        id: menuBarItem
 
-    signal fileSave
-    signal fileQuit
-
-    Menu {
-        id: fileMenu
-        title: "&File"
-
-        AppMenuItem {
-            menuText: "Save"
-            shortcutText: "CTRL+S"
-            shortcutKey: StandardKey.Save
-            onClicked: root.fileSave()
+        background: Rectangle {
+            color: menuBarItem.highlighted ? palette.highlight : "transparent"
         }
-        AppMenuItem {
-            menuText: "Quit"
-            shortcutText: "CTRL+Q"
-            shortcutKey: StandardKey.Quit
-            onClicked: root.fileQuit()
+        contentItem: Text {
+            horizontalAlignment: Text.AlignLeft
+            verticalAlignment: Text.AlignVCenter
+            text: menuBarItem.text
+            font: menuBarItem.font
+            color: menuBarItem.highlighted ? palette.highlightedText : palette.text
         }
+        
     }
 }

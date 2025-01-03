@@ -6,7 +6,7 @@ pragma ComponentBehavior: Bound
 
 Rectangle {
     id: root
-    color: palette.base
+    color: palette.window
 
     Connections {
         target: AppState

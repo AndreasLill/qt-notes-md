@@ -10,7 +10,7 @@ include_directories(
     src
 )
 
-set_source_files_properties(qml/shared/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(qml/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -27,13 +27,13 @@ qt_add_qml_module(appqt-notes-md
         qml/SideBar.qml
         qml/Workspace.qml
         qml/WorkspacePicker.qml
-        qml/shared/theme/Theme.qml
-        qml/shared/theme/ThemeColor.qml
-        qml/shared/components/AppIconButton.qml
-        qml/shared/components/AppTextButton.qml
-        qml/shared/components/AppMenuBar.qml
-        qml/shared/components/AppMenuItem.qml
-        qml/shared/components/AppToolTip.qml
+        qml/theme/Theme.qml
+        qml/theme/ThemeColor.qml
+        qml/components/AppIconButton.qml
+        qml/components/AppTextButton.qml
+        qml/components/AppMenuBar.qml
+        qml/components/AppMenuItem.qml
+        qml/components/AppToolTip.qml
     SOURCES
         src/AppState.h
         src/AppState.cpp

@@ -17,8 +17,8 @@ Rectangle {
         anchors.bottomMargin: 8
 
         AppIconButton {
+            id: createNoteButton
             Layout.alignment: Qt.AlignHCenter
-            tooltip: qsTr("Create Note")
             image: "../assets/add_24dp.svg"
             size: 20
             onClicked: {
@@ -26,16 +26,26 @@ Rectangle {
                 AppState.setCurrentNote(filePath)
                 console.log("Created folder: " + filePath)
             }
+
+            AppToolTip {
+                visible: createNoteButton.hovered
+                text: "Create Note"
+            }
         }
 
         AppIconButton {
+            id: createFolderButton
             Layout.alignment: Qt.AlignHCenter
-            tooltip: qsTr("Create Folder")
             image: "../assets/add_folder_24dp.svg"
             size: 20
             onClicked: {
                 let folderPath = AppState.createFolder(AppState.workspace, "Untitled Folder")
                 console.log("Created folder: " + folderPath)
+            }
+
+            AppToolTip {
+                visible: createFolderButton.hovered
+                text: "Create Folder"
             }
         }
     }

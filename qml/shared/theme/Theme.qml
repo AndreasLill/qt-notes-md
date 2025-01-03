@@ -15,9 +15,7 @@ QtObject {
         editorBackground: "#1e1e1e"
         editorText: "#ffffff"
         divider: "#2a2a2a"
-        tooltipBackground: "#404040"
-        tooltipText: "#ffffff"
-        menuBarBackground: "#171717"
-        menuBackground: "#303030"
+        tooltip: "#383838"
+        menuBackground: "#232323"
     }
 }

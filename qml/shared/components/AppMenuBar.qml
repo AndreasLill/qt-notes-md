@@ -6,7 +6,7 @@ MenuBar {
     id: root
     implicitHeight: 28
     background: Rectangle {
-        color: Theme.color.menuBarBackground
+        color: Theme.color.menuBackground
 
         Rectangle {
             color: Theme.color.divider
@@ -20,7 +20,7 @@ MenuBar {
         id: menuBarItem
 
         background: Rectangle {
-            color: menuBarItem.highlighted ? Qt.lighter(Theme.color.menuBarBackground) : "transparent"
+            color: menuBarItem.highlighted ? Qt.lighter(Theme.color.menuBackground) : "transparent"
         }
         contentItem: Text {
             horizontalAlignment: Text.AlignLeft

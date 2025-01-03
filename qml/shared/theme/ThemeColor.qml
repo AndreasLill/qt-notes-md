@@ -16,10 +16,8 @@ QtObject {
     required property color divider
 
     // Tooltip
-    required property color tooltipBackground
-    required property color tooltipText
+    required property color tooltip
 
     // Menu
-    required property color menuBarBackground
     required property color menuBackground
 }

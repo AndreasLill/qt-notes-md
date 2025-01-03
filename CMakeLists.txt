@@ -33,6 +33,7 @@ qt_add_qml_module(appqt-notes-md
         qml/shared/components/AppTextButton.qml
         qml/shared/components/AppMenuBar.qml
         qml/shared/components/AppMenuItem.qml
+        qml/shared/components/AppToolTip.qml
     SOURCES
         src/AppState.h
         src/AppState.cpp

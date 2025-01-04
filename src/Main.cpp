@@ -4,13 +4,14 @@
 
 int main(int argc, char *argv[])
 {
-    AppState *appState = new AppState();
-
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
-    qmlRegisterSingletonInstance("AppState", 1, 0, "AppState", appState);
 
+    AppState *appState = new AppState();
+    qmlRegisterSingletonInstance("AppState", 1, 0, "AppState", appState);
+    appState = engine.singletonInstance<AppState*>("qtnotesmd", "AppState");
+
+    QObject::connect(&app, &QCoreApplication::aboutToQuit, [&]() { appState->saveStateToFile(); });
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

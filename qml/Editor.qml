@@ -14,11 +14,6 @@ Rectangle {
 
     Connections {
         target: AppState
-        function onCurrentNoteChanged() {
-            let data = AppState.readFile(AppState.currentNote)
-            AppState.setEditorText(data)
-            console.log("current note set to " + AppState.currentNote)
-        }
         function onEditorTextChanged() {
             if (textArea.text != AppState.editorText) {
                 textArea.text = AppState.editorText

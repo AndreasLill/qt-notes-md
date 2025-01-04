@@ -31,6 +31,10 @@ ApplicationWindow {
         }
     }
 
+    Component.onCompleted: {
+        AppState.loadStateFromFile()
+    }
+
     WorkspacePicker {
         id: workspacePicker
         anchors.centerIn: parent

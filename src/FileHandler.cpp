@@ -2,15 +2,40 @@
 
 #include <QFile>
 #include <QDir>
+#include <QJsonDocument>
 
 namespace FileHandler
 {
+    void saveJson(const QString &path, const QJsonObject &json)
+    {
+        if (path.isEmpty())
+        {
+            qDebug() << "Path is empty: " << path;
+            return;
+        }
+        if (json.isEmpty())
+        {
+            qDebug() << "Json is empty: " << json;
+            return;
+        }
+
+        QJsonDocument doc(json);
+        QString jsonStr(doc.toJson(QJsonDocument::Indented).toStdString().c_str());
+        FileHandler::saveFile(path, jsonStr);
+    }
+
     void saveFile(const QString &path, const QString &data)
     {
         if (path.isEmpty())
+        {
+            qDebug() << "Path is empty: " << path;
             return;
+        }
         if (data.isEmpty())
+        {
+            qDebug() << "Data is empty: " << data;
             return;
+        }
 
         QFile file(path);
         file.open(QIODevice::WriteOnly | QIODevice::Text);
@@ -18,10 +43,20 @@ namespace FileHandler
         file.close();
     }
 
+    QJsonObject readJson(const QString &path)
+    {
+        QString jsonStr = FileHandler::readFile(path);
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonStr.toUtf8());
+        return jsonDoc.object();
+    }
+
     QString readFile(const QString &path)
     {
         if (path.isEmpty())
-            return {};
+        {
+            qDebug() << "Path is empty: " << path;
+            return "";
+        }
 
         QFile file(path);
         QTextStream stream(&file);
@@ -31,16 +66,49 @@ namespace FileHandler
         return data;
     }
 
-    QString createFile(const QString &path, const QString &name)
+    void createFile(const QString &path, const QString &name, const QString &extension)
     {
         if (path.isEmpty())
-            return {};
+        {
+            qDebug() << "Path is empty: " << path;
+            return;
+        }
         if (name.isEmpty())
-            return {};
-        
-        const QString extension = {".md"};
-        int count = 0;
+        {
+            qDebug() << "Name is empty: " << name;
+            return;
+        }
+        if (extension.isEmpty())
+        {
+            qDebug() << "Extension is empty: " << extension;
+            return;
+        }
 
+        QString fileName = QString("%1/%2%3").arg(path, name, extension);
+        QFile file(fileName);
+        file.open(QIODevice::WriteOnly | QIODevice::Text);
+        file.close();
+    }
+
+    QString createFileIncremental(const QString &path, const QString &name, const QString &extension)
+    {
+        if (path.isEmpty())
+        {
+            qDebug() << "Path is empty: " << path;
+            return "";
+        }
+        if (name.isEmpty())
+        {
+            qDebug() << "Name is empty: " << name;
+            return "";
+        }
+        if (extension.isEmpty())
+        {
+            qDebug() << "Extension is empty: " << extension;
+            return "";
+        }
+        
+        int count = 0;
         while (true)
         {
             QString fileName = (count > 0) ? QString("%1/%2(%3)%4").arg(path, name, QString::number(count), extension) : QString("%1/%2%3").arg(path, name, extension);
@@ -51,20 +119,42 @@ namespace FileHandler
                 file.close();
                 return fileName;
             }
-
             count++;
         }
     }
 
-    QString createFolder(const QString &path, const QString &name)
+    void createFolder(const QString &path, const QString &name)
     {
         if (path.isEmpty())
-            return {};
+        {
+            qDebug() << "Path is empty: " << path;
+            return;
+        }
         if (name.isEmpty())
-            return {};
+        {
+            qDebug() << "Name is empty: " << name;
+            return;
+        }
+
+
+        QDir dir(path);
+        dir.mkdir(name);
+    }
+
+    QString createFolderIncremental(const QString &path, const QString &name)
+    {
+        if (path.isEmpty())
+        {
+            qDebug() << "Path is empty: " << path;
+            return "";
+        }
+        if (name.isEmpty())
+        {
+            qDebug() << "Name is empty: " << name;
+            return "";
+        }
         
         int count = 0;
-
         while (true)
         {
             QString fullDirName = (count > 0) ? QString("%1/%2(%3)").arg(path, name, QString::number(count)) : QString("%1/%2").arg(path, name);
@@ -76,7 +166,6 @@ namespace FileHandler
                 dir.mkdir(folderName);
                 return path + "/" + folderName;
             }
-
             count++;
         }
     }

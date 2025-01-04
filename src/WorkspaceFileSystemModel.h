@@ -1,5 +1,4 @@
-#ifndef WORKSPACEFILESYSTEMMODEL_H
-#define WORKSPACEFILESYSTEMMODEL_H
+#pragma once
 
 #include <QFileSystemModel>
 #include <QQmlEngine>
@@ -28,5 +27,3 @@ signals:
 private:
     QModelIndex rootIndex;
 };
-
-#endif

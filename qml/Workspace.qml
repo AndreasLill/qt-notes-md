@@ -35,6 +35,11 @@ Rectangle {
             id: scrollBar
         }
 
+        function getParentFilePath(parentPath) {
+            let pathIndex = parentPath.toString().lastIndexOf("/")
+            return parentPath.toString().substring(0, pathIndex)
+        }
+
         delegate: TreeViewDelegate {
 
             required property int index
@@ -102,10 +107,16 @@ Rectangle {
 
             background: Rectangle {
                 id: itemBackground
-                color:  (!root.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
-                radius: 4
-                border.width: 1
-                border.color: (root.dragItem && root.dragTarget == item.filePath) ? Theme.color.accent : "transparent"
+                radius: root.dragItem ? 0 : 4
+                opacity: root.dragItem ? 0.3 : 1
+                color: {
+                    (root.dragItem == item.filePath) ? "transparent" :
+                    (root.dragItem && root.dragTarget == item.filePath) || // Folder is target, color folder
+                    (root.dragItem && item.filePath == treeView.getParentFilePath(dragTarget)) || // File is target, color parent folder
+                    (root.dragItem && treeView.getParentFilePath(item.filePath) == treeView.getParentFilePath(dragTarget) && treeView.getParentFilePath(item.filePath) != AppState.workspace) || // File is target, color siblings if sibling is not workspace root folder
+                    (root.dragItem && treeView.getParentFilePath(item.filePath) == dragTarget && treeView.getParentFilePath(item.filePath) != AppState.workspace) ? // Folder is target, color children of folder, unless child is workspace root folder
+                    Theme.color.accent : (!root.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
+                }
             }
         }
     }

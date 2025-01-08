@@ -116,3 +116,7 @@ QString AppState::createFolder(const QString &path, const QString &name)
     return FileHandler::createFolderIncremental(path, name);
 }
 
+bool AppState::moveFile(const QString &fromPath, const QString &toPath, const QString &fileName)
+{
+    return FileHandler::moveFile(fromPath, toPath, fileName);
+}

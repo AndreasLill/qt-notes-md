@@ -7,6 +7,11 @@ pragma ComponentBehavior: Bound
 Rectangle {
     id: root
     color: Theme.color.surface
+    border.width: 1
+    border.color: (dragItem && dragTarget == AppState.workspace) ? Theme.color.accent : "transparent"
+
+    property string dragItem: ""
+    property string dragTarget: ""
 
     Connections {
         target: AppState
@@ -16,7 +21,7 @@ Rectangle {
             console.log("Workspace set to " + AppState.workspace)
         }
     }
-
+    
     TreeView {
         id: treeView
         anchors.fill: parent
@@ -39,32 +44,68 @@ Rectangle {
             id: item
             indentation: 8
             implicitWidth: treeView.width
-            implicitHeight: 25
-            
-            contentItem: Text {
-                text: (AppState.currentNote == item.filePath && AppState.editorCanUndo) ? item.fileName + "*" : item.fileName
-                color: Theme.color.text
+            implicitHeight: 28
+
+            // Disable hover on item that is being dragged to prevent hover collisions.
+            hoverEnabled: root.dragItem != item.filePath
+
+            onHoveredChanged: {
+
+                if (item.hovered) {
+                    root.dragTarget = item.filePath
+                }
+                if (root.dragTarget == item.filePath && !item.hovered) {
+                    root.dragTarget = AppState.workspace
+                }
             }
 
-            background: Rectangle {
-                color: (AppState.currentNote == item.filePath) ? Theme.color.accent : (item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
-                radius: 4
-                opacity: (AppState.currentNote == item.filePath) ? 0.5 : 1
+            DragHandler {
+                id: dragHandler
+                target: parent
+                onActiveChanged: {
+                    if (active) {
+                        root.dragItem = item.filePath
+                    }
+                    else
+                    {
+                        let success = AppState.moveFile(item.filePath, root.dragTarget, item.fileName)
+
+                        if (success && AppState.currentNote == item.filePath) {
+                            AppState.setCurrentNote(root.dragTarget + "/" + item.fileName)
+                        }
+
+                        if (!success) {
+                            // Refresh model on failure to reset position of items.
+                            WorkspaceFileSystemModel.refresh()
+                        }
+
+                        root.dragItem = ""
+                    }
+                }
             }
 
             TapHandler {
-                acceptedButtons: Qt.LeftButton | Qt.RightButton
-                onSingleTapped: (eventPoint, button) => {
-                    switch (button) {
-                        case Qt.LeftButton:
-                            if (!item.hasChildren) {
-                                AppState.setCurrentNote(item.filePath)
-                            }
-                            break;
-                        case Qt.RightButton:
-                            break;
+                id: tapHandler
+                acceptedButtons: Qt.LeftButton
+                onTapped: {
+                    if (!root.dragItem && !item.hasChildren) {
+                        AppState.setCurrentNote(item.filePath)
                     }
                 }
+            }
+            
+            contentItem: Text {
+                text: (AppState.currentNote == item.filePath && AppState.editorCanUndo) ? item.fileName + "*" : item.fileName
+                color: (AppState.currentNote == item.filePath) ? Theme.color.accent : Theme.color.text
+                font.bold: (AppState.currentNote == item.filePath) ? true : false
+            }
+
+            background: Rectangle {
+                id: itemBackground
+                color:  (!root.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
+                radius: 4
+                border.width: 1
+                border.color: (root.dragItem && root.dragTarget == item.filePath) ? Theme.color.accent : "transparent"
             }
         }
     }

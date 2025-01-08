@@ -169,4 +169,36 @@ namespace FileHandler
             count++;
         }
     }
+
+    bool moveFile(const QString &fromPath, const QString &toPath, const QString &fileName)
+    {
+        if (fromPath == toPath)
+            return false;
+        if (fromPath.isEmpty())
+        {
+            qDebug() << "FromPath is empty: " << fromPath;
+            return false;
+        }
+        if (toPath.isEmpty())
+        {
+            qDebug() << "ToPath is empty: " << toPath;
+            return false;
+        }
+        if (fileName.isEmpty())
+        {
+            qDebug() << "FileName is empty: " << toPath;
+            return false;
+        }
+
+        QFile file(fromPath);
+        QFileInfo fileInfo(toPath);
+
+        if (fileInfo.isFile()) 
+        {
+            QString parentPath = fileInfo.absolutePath();
+            return file.rename(QString("%1/%2").arg(parentPath, fileName));
+        }
+
+        return file.rename(QString("%1/%2").arg(toPath, fileName));
+    }
 }

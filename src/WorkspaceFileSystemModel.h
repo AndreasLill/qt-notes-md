@@ -20,6 +20,7 @@ public:
     void setRootIndex(const QVariant &index);
 
     Q_INVOKABLE void setRootDirectory(const QString &str);
+    Q_INVOKABLE void refresh();
 
 signals:
     void rootIndexChanged();

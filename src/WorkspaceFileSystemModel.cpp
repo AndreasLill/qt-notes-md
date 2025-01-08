@@ -30,3 +30,8 @@ void WorkspaceFileSystemModel::setRootDirectory(const QString &str)
     setRootPath(dir.path());
     setRootIndex(QFileSystemModel::index(dir.path(), 0));
 }
+
+void WorkspaceFileSystemModel::refresh()
+{
+    emit layoutChanged();
+}

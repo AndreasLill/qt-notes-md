@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE void saveCurrentNote();
     Q_INVOKABLE QString createFile(const QString &path, const QString &name);
     Q_INVOKABLE QString createFolder(const QString &path, const QString &name);
+    Q_INVOKABLE bool moveFile(const QString &fromPath, const QString &toPath, const QString &fileName);
 
 signals:
     void workspaceChanged();

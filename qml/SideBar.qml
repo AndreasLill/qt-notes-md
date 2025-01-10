@@ -22,9 +22,7 @@ Rectangle {
             image: "../assets/add_24dp.svg"
             size: 20
             onClicked: {
-                let filePath = AppState.createFile(AppState.workspace, "Untitled Note")
-                AppState.setCurrentNote(filePath)
-                console.log("Created folder: " + filePath)
+                AppState.createFile(AppState.workspace, "Untitled Note")
             }
 
             AppToolTip {
@@ -39,8 +37,7 @@ Rectangle {
             image: "../assets/add_folder_24dp.svg"
             size: 20
             onClicked: {
-                let folderPath = AppState.createFolder(AppState.workspace, "Untitled Folder")
-                console.log("Created folder: " + folderPath)
+                AppState.createFolder(AppState.workspace, "Untitled Folder")
             }
 
             AppToolTip {

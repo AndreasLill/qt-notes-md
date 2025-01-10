@@ -35,7 +35,6 @@ Rectangle {
         function onWorkspaceChanged() {
             // Update the root directory when workspace changes.
             WorkspaceFileSystemModel.setRootDirectory(AppState.workspace)
-            console.log("Workspace set to " + AppState.workspace)
         }
     }
     

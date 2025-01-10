@@ -36,6 +36,8 @@ qt_add_qml_module(appqt-notes-md
         qml/components/AppMenuItem.qml
         qml/components/AppToolTip.qml
     SOURCES
+        src/AppConfig.h
+        src/AppConfig.cpp
         src/AppState.h
         src/AppState.cpp
         src/FileHandler.h

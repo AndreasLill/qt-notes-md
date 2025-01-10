@@ -26,14 +26,14 @@ public:
 
     Q_INVOKABLE void loadStateFromFile();
     Q_INVOKABLE void saveStateToFile();
+    Q_INVOKABLE void saveCurrentNote();
     Q_INVOKABLE void setWorkspace(const QString &value);
     Q_INVOKABLE void setCurrentNote(const QString &value);
     Q_INVOKABLE void setEditorText(const QString &text);
     Q_INVOKABLE void setEditorFontSize(int size);
     Q_INVOKABLE void setEditorCanUndo(bool value);
-    Q_INVOKABLE void saveCurrentNote();
-    Q_INVOKABLE QString createFile(const QString &path, const QString &name);
-    Q_INVOKABLE QString createFolder(const QString &path, const QString &name);
+    Q_INVOKABLE void createFile(const QString &path, const QString &name);
+    Q_INVOKABLE void createFolder(const QString &path, const QString &name);
     Q_INVOKABLE bool moveFile(const QString &fromPath, const QString &toPath, const QString &fileName);
 
 signals:
@@ -45,14 +45,9 @@ signals:
     void editorTextChanged();
 
 private:
-    static const QString APP_CONFIG_ROOT_PATH;
-    static const QString APP_CONFIG_FOLDER_NAME;
-    static const QString APP_CONFIG_FILE_NAME;
-    static const QString APP_CONFIG_FULL_PATH;
-
-    QString workspace;
-    QString currentNote;
-    QString editorText;
-    bool editorCanUndo = false;
-    int editorFontSize = 15;
+    QString m_workspace;
+    QString m_currentNote;
+    QString m_editorText;
+    bool m_editorCanUndo = false;
+    int m_editorFontSize = 15;
 };

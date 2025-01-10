@@ -1,119 +1,119 @@
 #include "AppState.h"
+#include "AppConfig.h"
 #include "FileHandler.h"
-#include <QStandardPaths>
-#include <QJsonObject>
 
-const QString AppState::APP_CONFIG_ROOT_PATH = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
-const QString AppState::APP_CONFIG_FOLDER_NAME = "qt-notes-md";
-const QString AppState::APP_CONFIG_FILE_NAME = "config.json";
-const QString AppState::APP_CONFIG_FULL_PATH = QString("%1/%2/%3").arg(APP_CONFIG_ROOT_PATH, APP_CONFIG_FOLDER_NAME, APP_CONFIG_FILE_NAME);
+#include <QJsonObject>
 
 void AppState::loadStateFromFile()
 {
-    QJsonObject json = FileHandler::readJson(APP_CONFIG_FULL_PATH);
+    QJsonObject json = AppConfig::loadStateFromFile();
     setWorkspace(json["workspace"].toString());
     setCurrentNote(json["currentNote"].toString());
-
-    qDebug() << "Loaded state from" << APP_CONFIG_FULL_PATH;
 }
 
 void AppState::saveStateToFile()
 {
     QJsonObject json;
-    json["workspace"] = workspace;
-    json["currentNote"] = currentNote;
-
-    FileHandler::createFolder(APP_CONFIG_ROOT_PATH, APP_CONFIG_FOLDER_NAME);
-    FileHandler::saveJson(APP_CONFIG_FULL_PATH, json);
-
-    qDebug() << "Saved state to" << APP_CONFIG_FULL_PATH;
+    json["workspace"] = m_workspace;
+    json["currentNote"] = m_currentNote;
+    AppConfig::saveStateToFile(json);
 }
 
 QString AppState::getWorkspace() const
 {
-    return workspace;
+    return m_workspace;
 }
 
 QString AppState::getCurrentNote() const
 {
-    return currentNote;
+    return m_currentNote;
 }
 
 QString AppState::getEditorText() const
 {
-    return editorText;
+    return m_editorText;
 }
 
 int AppState::getEditorFontSize()
 {
-    return editorFontSize;
+    return m_editorFontSize;
 }
 
 bool AppState::getEditorCanUndo()
 {
-    return editorCanUndo;
+    return m_editorCanUndo;
 }
 
-void AppState::setWorkspace(const QString &value)
+void AppState::setWorkspace(const QString &path)
 {
-    workspace = QString(value).replace("file://", "");
+    if (path.isEmpty())
+        return;
+
+    m_workspace = QString(path).replace("file://", "");
     emit workspaceChanged();
+    qDebug() << "Workspace set to" << m_workspace;
 }
 
-void AppState::setCurrentNote(const QString &value)
+void AppState::setCurrentNote(const QString &path)
 {
-    if (currentNote == value)
+    if (path.isEmpty())
         return;
-    if (value == "")
+    if (m_currentNote == path)
         return;
 
-    currentNote = value;
-    QString data = FileHandler::readFile(value);
+    m_currentNote = path;
+    QString data = FileHandler::readFile(m_currentNote);
     setEditorText(data);
     emit currentNoteChanged();
 }
 
 void AppState::setEditorText(const QString &text)
 {
-    if (editorText == text)
+    if (m_editorText == text)
         return;
 
-    editorText = text;
+    m_editorText = text;
     emit editorTextChanged();
 }
 
 void AppState::setEditorFontSize(int size)
 {
-    if (editorFontSize == size)
+    if (m_editorFontSize == size)
         return;
 
-    editorFontSize = size;
+    m_editorFontSize = size;
     emit editorFontSizeChanged();
 }
 
 void AppState::setEditorCanUndo(bool value)
 {
-    if (editorCanUndo == value)
+    if (m_editorCanUndo == value)
         return;
 
-    editorCanUndo = value;
+    m_editorCanUndo = value;
     emit editorCanUndoChanged();
 }
 
 void AppState::saveCurrentNote()
 {
-    FileHandler::saveFile(currentNote, editorText);
+    FileHandler::saveFile(m_currentNote, m_editorText);
     emit currentNoteSaved();
 }
 
-QString AppState::createFile(const QString &path, const QString &name)
+void AppState::createFile(const QString &path, const QString &name)
 {
-    return FileHandler::createFileIncremental(path, name, ".md");
+    QString fileName = FileHandler::createFileIncremental(path, name, ".md");
+
+    if (fileName.isEmpty())
+        return;
+
+    m_currentNote = fileName;
+    emit currentNoteChanged();
 }
 
-QString AppState::createFolder(const QString &path, const QString &name)
+void AppState::createFolder(const QString &path, const QString &name)
 {
-    return FileHandler::createFolderIncremental(path, name);
+    FileHandler::createFolderIncremental(path, name);
 }
 
 bool AppState::moveFile(const QString &fromPath, const QString &toPath, const QString &fileName)
@@ -122,10 +122,10 @@ bool AppState::moveFile(const QString &fromPath, const QString &toPath, const QS
 
     if (movedToPath.isEmpty())
         return false;
-    if (currentNote != fromPath)
+    if (m_currentNote != fromPath)
         return true;
 
-    currentNote = movedToPath;
+    m_currentNote = movedToPath;
     emit currentNoteChanged();
     return true;
 }

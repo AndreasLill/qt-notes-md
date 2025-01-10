@@ -89,11 +89,7 @@ Rectangle {
                     }
                     else
                     {
-                        let success = AppState.moveFile(item.filePath, root.dragTarget, item.fileName)
-
-                        if (success && AppState.currentNote == item.filePath) {
-                            AppState.setCurrentNote(root.dragTarget + "/" + item.fileName)
-                        }
+                        const success = AppState.moveFile(item.filePath, root.dragTarget, item.fileName)
 
                         if (!success) {
                             // Refresh model on failure to reset position of items.

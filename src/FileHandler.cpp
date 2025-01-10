@@ -170,35 +170,43 @@ namespace FileHandler
         }
     }
 
-    bool moveFile(const QString &fromPath, const QString &toPath, const QString &fileName)
+    QString moveFile(const QString &fromPath, const QString &toPath, const QString &fileName)
     {
         if (fromPath == toPath)
-            return false;
+            return "";
         if (fromPath.isEmpty())
         {
             qDebug() << "FromPath is empty: " << fromPath;
-            return false;
+            return "";
         }
         if (toPath.isEmpty())
         {
             qDebug() << "ToPath is empty: " << toPath;
-            return false;
+            return "";
         }
         if (fileName.isEmpty())
         {
             qDebug() << "FileName is empty: " << toPath;
-            return false;
+            return "";
         }
 
         QFile file(fromPath);
         QFileInfo fileInfo(toPath);
+        QString targetPath;
 
         if (fileInfo.isFile()) 
         {
             QString parentPath = fileInfo.absolutePath();
-            return file.rename(QString("%1/%2").arg(parentPath, fileName));
+            targetPath = QString("%1/%2").arg(parentPath, fileName);
+        }
+        else
+        {
+            targetPath = QString("%1/%2").arg(toPath, fileName);
         }
 
-        return file.rename(QString("%1/%2").arg(toPath, fileName));
+        if (!file.rename(targetPath))
+                return "";
+
+        return targetPath;
     }
 }

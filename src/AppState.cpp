@@ -118,5 +118,14 @@ QString AppState::createFolder(const QString &path, const QString &name)
 
 bool AppState::moveFile(const QString &fromPath, const QString &toPath, const QString &fileName)
 {
-    return FileHandler::moveFile(fromPath, toPath, fileName);
+    QString movedToPath = FileHandler::moveFile(fromPath, toPath, fileName);
+
+    if (movedToPath.isEmpty())
+        return false;
+    if (currentNote != fromPath)
+        return true;
+
+    currentNote = movedToPath;
+    emit currentNoteChanged();
+    return true;
 }

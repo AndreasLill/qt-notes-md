@@ -83,7 +83,7 @@ Rectangle {
                 font: textArea.font
             }
 
-            onCanUndoChanged: AppState.setEditorCanUndo(textArea.canUndo)
+            onCanUndoChanged: AppState.setEditorIsUnsaved(textArea.canUndo)
             onTextChanged: AppState.setEditorText(textArea.text)
         }
     }

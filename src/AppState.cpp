@@ -39,9 +39,9 @@ int AppState::getEditorFontSize()
     return m_editorFontSize;
 }
 
-bool AppState::getEditorCanUndo()
+bool AppState::getEditorIsUnsaved()
 {
-    return m_editorCanUndo;
+    return m_editorIsUnsaved;
 }
 
 void AppState::setWorkspace(const QString &path)
@@ -85,13 +85,13 @@ void AppState::setEditorFontSize(int size)
     emit editorFontSizeChanged();
 }
 
-void AppState::setEditorCanUndo(bool value)
+void AppState::setEditorIsUnsaved(bool value)
 {
-    if (m_editorCanUndo == value)
+    if (m_editorIsUnsaved == value)
         return;
 
-    m_editorCanUndo = value;
-    emit editorCanUndoChanged();
+    m_editorIsUnsaved = value;
+    emit editorIsUnsavedChanged();
 }
 
 void AppState::saveCurrentNote()

@@ -13,7 +13,7 @@ class AppState : public QObject
     Q_PROPERTY(QString currentNote READ getCurrentNote NOTIFY currentNoteChanged)
     Q_PROPERTY(QString editorText READ getEditorText NOTIFY editorTextChanged)
     Q_PROPERTY(int editorFontSize READ getEditorFontSize NOTIFY editorFontSizeChanged)
-    Q_PROPERTY(bool editorCanUndo READ getEditorCanUndo NOTIFY editorCanUndoChanged)
+    Q_PROPERTY(bool editorIsUnsaved READ getEditorIsUnsaved NOTIFY editorIsUnsavedChanged)
 
 public:
     explicit AppState(QObject *parent = nullptr) : QObject(parent) {}
@@ -22,7 +22,7 @@ public:
     QString getCurrentNote() const;
     QString getEditorText() const;
     int getEditorFontSize();
-    bool getEditorCanUndo();
+    bool getEditorIsUnsaved();
 
     Q_INVOKABLE void loadStateFromFile();
     Q_INVOKABLE void saveStateToFile();
@@ -31,7 +31,7 @@ public:
     Q_INVOKABLE void setCurrentNote(const QString &value);
     Q_INVOKABLE void setEditorText(const QString &text);
     Q_INVOKABLE void setEditorFontSize(int size);
-    Q_INVOKABLE void setEditorCanUndo(bool value);
+    Q_INVOKABLE void setEditorIsUnsaved(bool value);
     Q_INVOKABLE void createFile(const QString &path, const QString &name);
     Q_INVOKABLE void createFolder(const QString &path, const QString &name);
     Q_INVOKABLE bool moveFile(const QString &fromPath, const QString &toPath, const QString &fileName);
@@ -41,13 +41,13 @@ signals:
     void currentNoteChanged();
     void currentNoteSaved();
     void editorFontSizeChanged();
-    void editorCanUndoChanged();
+    void editorIsUnsavedChanged();
     void editorTextChanged();
 
 private:
     QString m_workspace;
     QString m_currentNote;
     QString m_editorText;
-    bool m_editorCanUndo = false;
+    bool m_editorIsUnsaved = false;
     int m_editorFontSize = 15;
 };

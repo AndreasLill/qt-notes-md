@@ -111,7 +111,7 @@ Rectangle {
             }
             
             contentItem: Text {
-                text: (AppState.currentNote == item.filePath && AppState.editorCanUndo) ? item.fileName + "*" : item.fileName
+                text: (AppState.currentNote == item.filePath && AppState.editorIsUnsaved) ? item.fileName + "*" : item.fileName
                 color: (AppState.currentNote == item.filePath) ? Theme.color.accent : Theme.color.text
                 font.bold: (AppState.currentNote == item.filePath) ? true : false
             }

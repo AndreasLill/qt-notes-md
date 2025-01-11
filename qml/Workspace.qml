@@ -14,6 +14,7 @@ Rectangle {
         Theme.color.accent : "transparent"
     }
 
+    property string contextTarget: ""
     property string dragItem: ""
     property string dragTarget: ""
     property string dragTargetParent: ""
@@ -101,12 +102,28 @@ Rectangle {
             }
 
             TapHandler {
-                id: tapHandler
                 acceptedButtons: Qt.LeftButton
                 onTapped: {
                     if (!root.dragItem && !item.hasChildren) {
                         AppState.setCurrentNote(item.filePath)
                     }
+                }
+            }
+
+            TapHandler {
+                acceptedButtons: Qt.RightButton
+                onTapped: {
+                    root.contextTarget = item.filePath
+                    itemContextMenu.popup()
+                }
+            }
+
+            AppContextMenu {
+                id: itemContextMenu
+
+                AppMenuItem {
+                    text: "Delete"
+                    onClicked: AppState.deleteFile(item.filePath)
                 }
             }
             
@@ -128,6 +145,8 @@ Rectangle {
                     (root.dragItem && root.dragTargetIsFile && item.filePath.startsWith(root.dragTargetParent + "/") && root.dragTargetParent != AppState.workspace) // This item is a child of target parent folder.
                     ? Theme.color.accent : (!root.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
                 }
+                border.width: 1
+                border.color: (itemContextMenu.opened && root.contextTarget == item.filePath) ? Theme.color.accent : "transparent"
             }
         }
     }

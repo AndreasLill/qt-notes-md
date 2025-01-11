@@ -209,4 +209,12 @@ namespace FileHandler
 
         return targetPath;
     }
+
+    void deleteFile(const QString &path)
+    {
+        assert(!path.isEmpty());
+
+        QFile file(path);
+        file.remove();
+    }
 }

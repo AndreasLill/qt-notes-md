@@ -35,6 +35,7 @@ public:
     Q_INVOKABLE void createFile(const QString &path, const QString &name);
     Q_INVOKABLE void createFolder(const QString &path, const QString &name);
     Q_INVOKABLE bool moveFile(const QString &fromPath, const QString &toPath, const QString &fileName);
+    Q_INVOKABLE void deleteFile(const QString &path);
 
 signals:
     void workspaceChanged();

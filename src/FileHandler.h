@@ -14,4 +14,5 @@ namespace FileHandler
     void createFolder(const QString &path, const QString &name);
     QString createFolderIncremental(const QString &path, const QString &name);
     QString moveFile(const QString &fromPath, const QString &toPath, const QString &fileName);
+    void deleteFile(const QString &path);
 }

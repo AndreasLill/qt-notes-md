@@ -9,11 +9,13 @@ MenuItem {
     id: root
 
     background: Rectangle {
+        implicitWidth: 200
+        implicitHeight: 30
+        radius: 4
         color: root.focus ? Qt.lighter(Theme.color.overlay) : Theme.color.overlay
     }
 
     contentItem: Rectangle {
-        anchors.fill: parent
         color: "transparent"
 
         Text {
@@ -38,6 +40,5 @@ MenuItem {
     action: Action {
         text: root.text
         shortcut: root.shortcut
-        onTriggered: root.clicked()
     }
 }

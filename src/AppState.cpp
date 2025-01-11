@@ -56,14 +56,17 @@ void AppState::setWorkspace(const QString &path)
 
 void AppState::setCurrentNote(const QString &path)
 {
-    if (path.isEmpty())
-        return;
     if (m_currentNote == path)
         return;
 
     m_currentNote = path;
-    QString data = FileHandler::readFile(m_currentNote);
-    setEditorText(data);
+
+    if (!path.isEmpty())
+    {
+        QString data = FileHandler::readFile(m_currentNote);
+        setEditorText(data);
+    }
+    
     emit currentNoteChanged();
 }
 
@@ -102,13 +105,12 @@ void AppState::saveCurrentNote()
 
 void AppState::createFile(const QString &path, const QString &name)
 {
-    QString fileName = FileHandler::createFileIncremental(path, name, ".md");
+    QString filePath = FileHandler::createFileIncremental(path, name, ".md");
 
-    if (fileName.isEmpty())
+    if (filePath.isEmpty())
         return;
 
-    m_currentNote = fileName;
-    emit currentNoteChanged();
+    setCurrentNote(filePath);
 }
 
 void AppState::createFolder(const QString &path, const QString &name)
@@ -128,4 +130,15 @@ bool AppState::moveFile(const QString &fromPath, const QString &toPath, const QS
     m_currentNote = movedToPath;
     emit currentNoteChanged();
     return true;
+}
+
+void AppState::deleteFile(const QString &path)
+{
+    if (path.isEmpty())
+        return;
+
+    if (path == m_currentNote)
+        setCurrentNote("");
+    
+    FileHandler::deleteFile(path);
 }

@@ -20,7 +20,7 @@ Rectangle {
             id: createNoteButton
             Layout.alignment: Qt.AlignHCenter
             image: "../assets/add_24dp.svg"
-            size: 20
+            hoverColor: Qt.lighter(Theme.color.surface)
             onClicked: {
                 AppState.createFile(AppState.workspace, "Untitled Note")
             }
@@ -35,7 +35,7 @@ Rectangle {
             id: createFolderButton
             Layout.alignment: Qt.AlignHCenter
             image: "../assets/add_folder_24dp.svg"
-            size: 20
+            hoverColor: Qt.lighter(Theme.color.surface)
             onClicked: {
                 AppState.createFolder(AppState.workspace, "Untitled Folder")
             }

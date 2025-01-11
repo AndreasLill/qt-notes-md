@@ -33,7 +33,7 @@ ToolTip {
         border.width: 1
     }
     contentItem: Text {
-        padding: 4
+        padding: 8
         text: root.text
         color: Theme.color.text
         font.pixelSize: 13

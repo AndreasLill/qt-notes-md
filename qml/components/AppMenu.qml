@@ -12,5 +12,4 @@ Menu {
         radius: 4
         color: Theme.color.overlay
     }
-
 }

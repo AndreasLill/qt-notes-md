@@ -12,7 +12,7 @@ ApplicationWindow {
     color: Theme.color.background
     menuBar: AppMenuBar {
 
-        Menu {
+        AppMenu {
             id: fileMenu
             title: "File"
 

@@ -32,7 +32,7 @@ qt_add_qml_module(appqt-notes-md
         qml/theme/ThemeColor.qml
         qml/components/AppIconButton.qml
         qml/components/AppTextButton.qml
-        qml/components/AppContextMenu.qml
+        qml/components/AppMenu.qml
         qml/components/AppMenuBar.qml
         qml/components/AppMenuItem.qml
         qml/components/AppToolTip.qml

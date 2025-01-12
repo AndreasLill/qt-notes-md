@@ -4,8 +4,9 @@ import qtnotesmd
 
 MenuBar {
     id: root
-    implicitHeight: 28
+
     background: Rectangle {
+        implicitHeight: 30
         color: Theme.color.surface
 
         Rectangle {
@@ -16,10 +17,12 @@ MenuBar {
             anchors.right: parent.right
         }
     }
+
     delegate: MenuBarItem {
         id: menuBarItem
 
         background: Rectangle {
+            implicitHeight: 30
             color: menuBarItem.highlighted ? Qt.lighter(Theme.color.surface) : "transparent"
         }
         contentItem: Text {

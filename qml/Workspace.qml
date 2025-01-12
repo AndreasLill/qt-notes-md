@@ -118,7 +118,7 @@ Rectangle {
                 }
             }
 
-            AppContextMenu {
+            AppMenu {
                 id: itemContextMenu
 
                 AppMenuItem {

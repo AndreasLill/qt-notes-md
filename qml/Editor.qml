@@ -44,7 +44,7 @@ Rectangle {
 
         AppTextButton {
             Layout.alignment: Qt.AlignHCenter
-            contentText: "Create a new note"
+            text: "Create a new note"
             onClicked: {
                 let fileName = AppState.createFile(AppState.workspace, "Untitled Note")
                 AppState.setCurrentNote(fileName)

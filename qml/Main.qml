@@ -42,30 +42,9 @@ ApplicationWindow {
         visible: !AppState.workspace
     }
 
-    SideBar {
-        id: sideBar
-        anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        visible: AppState.workspace
-    }
-
-    Rectangle {
-        id: divider
-        implicitWidth: 1
-        anchors.left: sideBar.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        color: Qt.lighter(Theme.color.surface)
-        visible: AppState.workspace
-    }
-
     SplitView {
         id: splitView
-        anchors.left: divider.right
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.fill: parent
         orientation: Qt.Horizontal
         visible: AppState.workspace
 
@@ -92,7 +71,7 @@ ApplicationWindow {
 
         Workspace {
             id: workspace
-            implicitWidth: 300
+            implicitWidth: 400
             SplitView.minimumWidth: 200
         }
 

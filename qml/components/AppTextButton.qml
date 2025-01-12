@@ -3,19 +3,19 @@ import QtQuick.Controls
 import qtnotesmd
 
 Button {
-    required property string contentText
-    property int fontSize: 15
+    property color color: Theme.color.accent
 
     id: root
     padding: 8
     contentItem: Text {
-        text: root.contentText
-        color: Theme.color.accent
-        font.pixelSize: root.fontSize
+        horizontalAlignment: Text.AlignHCenter
+        text: root.text
+        color: root.color
+        font.pixelSize: 15
         font.bold: true
     }
     background: Rectangle {
-        color: root.hovered ? Theme.color.accent : "transparent"
+        color: root.hovered ? root.color : "transparent"
         radius: 4
         opacity: 0.1
     }

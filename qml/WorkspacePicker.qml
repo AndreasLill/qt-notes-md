@@ -19,7 +19,7 @@ ColumnLayout {
 
     AppTextButton {
         Layout.alignment: Qt.AlignHCenter
-        contentText: qsTr("Select Workspace")
+        text: qsTr("Select Workspace")
         onClicked: folderDialog.open()
     }
 

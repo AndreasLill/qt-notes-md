@@ -12,6 +12,7 @@ QtObject {
         overlay: "#181926"
         text: "#cad3f5"
         accent: "#a6da95"
+        alert: "#ff3e37"
         editorBackground: "#363a4f"
         editorText: "#cad3f5"
         editorTextHighlight: "#60a6da95"

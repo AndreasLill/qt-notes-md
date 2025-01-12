@@ -30,6 +30,7 @@ qt_add_qml_module(appqt-notes-md
         qml/WorkspacePicker.qml
         qml/theme/Theme.qml
         qml/theme/ThemeColor.qml
+        qml/components/AppConfirmDialog.qml
         qml/components/AppIconButton.qml
         qml/components/AppTextButton.qml
         qml/components/AppMenu.qml

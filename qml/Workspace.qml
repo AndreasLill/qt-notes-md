@@ -47,6 +47,7 @@ Rectangle {
         rootIndex: WorkspaceFileSystemModel.rootIndex
         boundsBehavior: Flickable.StopAtBounds
         boundsMovement: Flickable.StopAtBounds
+        z: 5
 
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
@@ -80,9 +81,16 @@ Rectangle {
                 }
             }
 
+            MouseArea {
+                id: mouseArea
+                
+            }
+
             DragHandler {
                 id: dragHandler
-                target: parent
+                // Set target to null in handler and instead update the position on "dragRect" to the dragHandler.centroid.position
+                target: null
+
                 onActiveChanged: {
                     if (active) {
                         root.dragItem = item.filePath
@@ -152,6 +160,27 @@ Rectangle {
                 }
                 border.width: 1
                 border.color: (itemContextMenu.opened && root.contextTarget == item.filePath) ? Theme.color.accent : "transparent"
+            }
+
+            Rectangle {
+                id: dragRect
+                color: Theme.color.overlay
+                width: dragText.implicitWidth
+                height: dragText.implicitHeight
+                visible: (root.dragItem == item.filePath)
+                radius: 4
+                x: dragHandler.centroid.position.x + 8
+                y: dragHandler.centroid.position.y + 8
+                z: 99
+
+                Text {
+                    id: dragText
+                    anchors.centerIn: parent
+                    text: item.fileName
+                    color: Theme.color.text
+                    padding: 8
+                    z: 99
+                }
             }
         }
     }

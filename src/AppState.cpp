@@ -136,9 +136,20 @@ void AppState::deleteFile(const QString &path)
 {
     if (path.isEmpty())
         return;
-
-    if (path == m_currentNote)
-        setCurrentNote("");
     
     FileHandler::deleteFile(path);
+
+    if (!FileHandler::exists(m_currentNote))
+        setCurrentNote("");
+}
+
+void AppState::deleteFolder(const QString &path)
+{
+    if (path.isEmpty())
+        return;
+
+    FileHandler::deleteFolder(path);
+
+    if (!FileHandler::exists(m_currentNote))
+        setCurrentNote("");
 }

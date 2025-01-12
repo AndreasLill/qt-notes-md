@@ -123,7 +123,12 @@ Rectangle {
 
                 AppMenuItem {
                     text: "Delete"
-                    onClicked: AppState.deleteFile(item.filePath)
+                    onClicked: {
+                        if (item.hasChildren)
+                            AppState.deleteFolder(item.filePath)
+                        else
+                            AppState.deleteFile(item.filePath)
+                    }
                 }
             }
             

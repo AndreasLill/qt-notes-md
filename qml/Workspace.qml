@@ -14,7 +14,8 @@ Rectangle {
         Theme.color.accent : "transparent"
     }
 
-    property string contextTarget: ""
+    readonly property alias dragDisplay: dragDisplay
+    property string contextMenuTarget: ""
     property string dragItem: ""
     property string dragTarget: ""
     property string dragTargetParent: ""
@@ -38,6 +39,26 @@ Rectangle {
             WorkspaceFileSystemModel.setRootDirectory(AppState.workspace)
         }
     }
+
+    Rectangle {
+        property string text
+
+        id: dragDisplay
+        color: Theme.color.overlay
+        width: dragText.implicitWidth
+        height: dragText.implicitHeight
+        visible: root.dragItem
+        radius: 4
+        z: 99
+
+        Text {
+            id: dragText
+            anchors.centerIn: parent
+            text: dragDisplay.text
+            color: Theme.color.text
+            padding: 8
+        }
+    }
     
     TreeView {
         id: treeView
@@ -47,7 +68,6 @@ Rectangle {
         rootIndex: WorkspaceFileSystemModel.rootIndex
         boundsBehavior: Flickable.StopAtBounds
         boundsMovement: Flickable.StopAtBounds
-        z: 5
 
         ScrollBar.vertical: ScrollBar {
             id: scrollBar
@@ -63,6 +83,7 @@ Rectangle {
             indentation: 8
             implicitWidth: treeView.width
             implicitHeight: 28
+            z: (root.dragItem == item.filePath) ? 99 : 0
 
             // Disable hover on item that is being dragged to prevent hover collisions.
             hoverEnabled: root.dragItem != item.filePath
@@ -88,11 +109,18 @@ Rectangle {
 
             DragHandler {
                 id: dragHandler
-                // Set target to null in handler and instead update the position on "dragRect" to the dragHandler.centroid.position
+                // Set target to null in handler and instead update the position manually on "dragDisplay" when translation changes.
                 target: null
+                onTranslationChanged: {
+                    const heightOffset = item.height * item.index
+                    const offset = 16
 
+                    root.dragDisplay.x = dragHandler.centroid.position.x + offset
+                    root.dragDisplay.y = dragHandler.centroid.position.y + heightOffset + offset
+                }
                 onActiveChanged: {
                     if (active) {
+                        root.dragDisplay.text = item.fileName
                         root.dragItem = item.filePath
                     }
                     else
@@ -121,7 +149,7 @@ Rectangle {
             TapHandler {
                 acceptedButtons: Qt.RightButton
                 onTapped: {
-                    root.contextTarget = item.filePath
+                    root.contextMenuTarget = item.filePath
                     itemContextMenu.popup()
                 }
             }
@@ -159,28 +187,7 @@ Rectangle {
                     ? Theme.color.accent : (!root.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
                 }
                 border.width: 1
-                border.color: (itemContextMenu.opened && root.contextTarget == item.filePath) ? Theme.color.accent : "transparent"
-            }
-
-            Rectangle {
-                id: dragRect
-                color: Theme.color.overlay
-                width: dragText.implicitWidth
-                height: dragText.implicitHeight
-                visible: (root.dragItem == item.filePath)
-                radius: 4
-                x: dragHandler.centroid.position.x + 8
-                y: dragHandler.centroid.position.y + 8
-                z: 99
-
-                Text {
-                    id: dragText
-                    anchors.centerIn: parent
-                    text: item.fileName
-                    color: Theme.color.text
-                    padding: 8
-                    z: 99
-                }
+                border.color: (itemContextMenu.opened && root.contextMenuTarget == item.filePath) ? Theme.color.accent : "transparent"
             }
         }
     }

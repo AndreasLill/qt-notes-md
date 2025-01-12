@@ -24,6 +24,7 @@ MenuBar {
         background: Rectangle {
             implicitHeight: 30
             color: menuBarItem.highlighted ? Qt.lighter(Theme.color.surface) : "transparent"
+            radius: 4
         }
         contentItem: Text {
             horizontalAlignment: Text.AlignLeft

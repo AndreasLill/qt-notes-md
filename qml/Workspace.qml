@@ -5,18 +5,19 @@ import qtnotesmd
 pragma ComponentBehavior: Bound
 
 Rectangle {
+    id: root
 
     AppConfirmDialog {
         id: deleteDialog
         title: "Delete?"
-        text: "Are you sure you want to delete <b>" + root.contextMenuTargetName + "</b>?"
+        text: "Are you sure you want to delete <b>" + workspace.contextMenuTargetName + "</b>?"
         acceptButtonText: "Delete"
 
         onClickAccept: {
-            if (root.contextMenuTargetIsFile)
-                AppState.deleteFile(root.contextMenuTarget)
+            if (workspace.contextMenuTargetIsFile)
+                AppState.deleteFile(workspace.contextMenuTarget)
             else
-                AppState.deleteFolder(root.contextMenuTarget)
+                AppState.deleteFolder(workspace.contextMenuTarget)
         }
     }
 
@@ -38,7 +39,6 @@ Rectangle {
     }
 
     Rectangle {
-        readonly property alias dragDisplay: dragDisplay
         property string contextMenuTarget: ""
         property string contextMenuTargetName: ""
         property bool contextMenuTargetIsFile: false
@@ -47,7 +47,7 @@ Rectangle {
         property string dragTargetParent: ""
         property bool dragTargetIsFile: false
 
-        id: root
+        id: workspace
         color: Theme.color.surface
         anchors.left: divider.right
         anchors.right: parent.right
@@ -87,7 +87,7 @@ Rectangle {
             color: Theme.color.overlay
             width: dragText.implicitWidth
             height: dragText.implicitHeight
-            visible: root.dragItem
+            visible: workspace.dragItem
             radius: 4
             z: 99
 
@@ -123,22 +123,22 @@ Rectangle {
                 indentation: 8
                 implicitWidth: treeView.width
                 implicitHeight: 28
-                z: (root.dragItem == item.filePath) ? 99 : 0
+                z: (workspace.dragItem == item.filePath) ? 99 : 0
 
                 // Disable hover on item that is being dragged to prevent hover collisions.
-                hoverEnabled: root.dragItem != item.filePath
+                hoverEnabled: workspace.dragItem != item.filePath
 
                 onHoveredChanged: {
 
                     if (item.hovered) {
-                        root.dragTarget = item.filePath
-                        root.dragTargetParent = root.getParentFilePath(item.filePath)
-                        root.dragTargetIsFile = root.isFile(item.filePath)
+                        workspace.dragTarget = item.filePath
+                        workspace.dragTargetParent = workspace.getParentFilePath(item.filePath)
+                        workspace.dragTargetIsFile = workspace.isFile(item.filePath)
                     }
-                    if (root.dragTarget == item.filePath && !item.hovered) {
-                        root.dragTarget = AppState.workspace
-                        root.dragTargetParent = ""
-                        root.dragTargetIsFile = false
+                    if (workspace.dragTarget == item.filePath && !item.hovered) {
+                        workspace.dragTarget = AppState.workspace
+                        workspace.dragTargetParent = ""
+                        workspace.dragTargetIsFile = false
                     }
                 }
 
@@ -155,24 +155,24 @@ Rectangle {
                         const heightOffset = item.height * item.index
                         const offset = 16
 
-                        root.dragDisplay.x = dragHandler.centroid.position.x + offset
-                        root.dragDisplay.y = dragHandler.centroid.position.y + heightOffset + offset
+                        dragDisplay.x = dragHandler.centroid.position.x + offset
+                        dragDisplay.y = dragHandler.centroid.position.y + heightOffset + offset
                     }
                     onActiveChanged: {
                         if (active) {
-                            root.dragDisplay.text = item.fileName
-                            root.dragItem = item.filePath
+                            dragDisplay.text = item.fileName
+                            workspace.dragItem = item.filePath
                         }
                         else
                         {
-                            const success = AppState.moveFile(item.filePath, root.dragTarget, item.fileName)
+                            const success = AppState.moveFile(item.filePath, workspace.dragTarget, item.fileName)
 
                             if (!success) {
                                 // Refresh model on failure to reset position of items.
                                 WorkspaceFileSystemModel.refresh()
                             }
 
-                            root.dragItem = ""
+                            workspace.dragItem = ""
                         }
                     }
                 }
@@ -180,7 +180,7 @@ Rectangle {
                 TapHandler {
                     acceptedButtons: Qt.LeftButton
                     onTapped: {
-                        if (!root.dragItem && !item.hasChildren) {
+                        if (!workspace.dragItem && !item.hasChildren) {
                             AppState.setCurrentNote(item.filePath)
                         }
                     }
@@ -189,9 +189,9 @@ Rectangle {
                 TapHandler {
                     acceptedButtons: Qt.RightButton
                     onTapped: {
-                        root.contextMenuTarget = item.filePath
-                        root.contextMenuTargetName = item.fileName
-                        root.contextMenuTargetIsFile = !item.hasChildren
+                        workspace.contextMenuTarget = item.filePath
+                        workspace.contextMenuTargetName = item.fileName
+                        workspace.contextMenuTargetIsFile = !item.hasChildren
                         itemContextMenu.popup()
                     }
                 }
@@ -215,18 +215,18 @@ Rectangle {
 
                 background: Rectangle {
                     id: itemBackground
-                    radius: root.dragItem ? 0 : 4
-                    opacity: root.dragItem ? 0.3 : 1
+                    radius: workspace.dragItem ? 0 : 4
+                    opacity: workspace.dragItem ? 0.3 : 1
                     color: {
-                        (root.dragItem == item.filePath) ? "transparent" :
-                        (root.dragItem && item.hasChildren && item.filePath == root.dragTarget) || // This item is the target folder.
-                        (root.dragItem && item.hasChildren && root.dragTargetIsFile && item.filePath == root.dragTargetParent) || // This item is a folder, the target is a child.
-                        (root.dragItem && !root.dragTargetIsFile && item.filePath.startsWith(root.dragTarget + "/") && root.dragTarget != AppState.workspace) || // This item is a child of the target folder.
-                        (root.dragItem && root.dragTargetIsFile && item.filePath.startsWith(root.dragTargetParent + "/") && root.dragTargetParent != AppState.workspace) // This item is a child of target parent folder.
-                        ? Theme.color.accent : (!root.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
+                        (workspace.dragItem == item.filePath) ? "transparent" :
+                        (workspace.dragItem && item.hasChildren && item.filePath == workspace.dragTarget) || // This item is the target folder.
+                        (workspace.dragItem && item.hasChildren && workspace.dragTargetIsFile && item.filePath == workspace.dragTargetParent) || // This item is a folder, the target is a child.
+                        (workspace.dragItem && !workspace.dragTargetIsFile && item.filePath.startsWith(workspace.dragTarget + "/") && workspace.dragTarget != AppState.workspace) || // This item is a child of the target folder.
+                        (workspace.dragItem && workspace.dragTargetIsFile && item.filePath.startsWith(workspace.dragTargetParent + "/") && workspace.dragTargetParent != AppState.workspace) // This item is a child of target parent folder.
+                        ? Theme.color.accent : (!workspace.dragItem && item.hovered) ? Qt.lighter(Theme.color.surface) : "transparent"
                     }
                     border.width: 1
-                    border.color: (itemContextMenu.opened && root.contextMenuTarget == item.filePath) ? Theme.color.accent : "transparent"
+                    border.color: (itemContextMenu.opened && workspace.contextMenuTarget == item.filePath) ? Theme.color.accent : "transparent"
                 }
             }
         }
